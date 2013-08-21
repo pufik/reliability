@@ -1,0 +1,26 @@
+<div class="actionMenu">
+	<input type="hidden" name="projectId" id="projectIdHolder"
+		value="{{id}}" />
+</div>
+<div id="projectTabs">
+	<ul>
+		<li><a href="#infoTab"><span>Info</span></a></li>
+		<li><a href="#bugTab"><span>Issues</span></a></li>
+		<li><a href="#metricTab"><span>Metrics</span></a></li>
+		<li><a href="#reliabilityTab"><span>Reliability</span></a></li>
+	</ul>
+	<div id="infoTab">
+		<p>
+			<b>Project UID:</b> {{id}}
+		</p>
+		<p>
+			<b>Name:</b> {{name}}
+		</p>
+		<p>
+			<b>Description:</b> {{description}}
+		</p>
+	</div>
+	<div id="bugTab" class="ui-helper-clearfix"></div>
+	<div id="metricTab" class="ui-helper-clearfix"></div>
+	<div id="reliabilityTab" class="ui-helper-clearfix">Reliability</div>
+</div>

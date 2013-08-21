@@ -1,0 +1,26 @@
+<div class="actionMenu">
+	<a href="#createNew"
+		onclick="getContext().getProjectController().getAll()"
+		class="buttonCreate" title="Add New Project">Create Project</a>
+</div>
+<div id="projectListPlace" style="width: 100%">
+	<table id="projectList" style="width: 100%">
+		<thead>
+			<tr>
+				<th style="width: 85px;">Project ID</th>
+				<th>Name</th>
+				<th>Created</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each items}}
+			<tr>
+				<td style="width: 85px;"><input type="hidden" name="projectId"
+					value="{{id}}" /> {{id}}</td>
+				<td>{{name}}</td>
+				<td style="width: 85px;">{{createDate}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>

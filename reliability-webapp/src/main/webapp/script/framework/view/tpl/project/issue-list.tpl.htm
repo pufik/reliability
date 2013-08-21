@@ -1,0 +1,41 @@
+<div class="actionMenu">
+	<a href="#showGraph" onclick="getContext().getGraphController().showIssueStatistic()" class="showTypeGraph" title="Show Issue Statistic">Issue Statistic</a>
+	<a href="#showGraph" onclick="getContext().getGraphController().showIssueGraphByType()" class="showTypeGraph" title="Show Type Graph">Issues by Type</a>
+	<a href="#showGraph" onclick="getContext().getGraphController().showIssueGraphByPriority()"	class="showPriorityGraph" title="Show Priority Graph">Issues by Priority</a>
+	<a href="#createNew" onclick="getContext().getProjectController().getAll()" class="buttonCreate" title="Add New Project">Add Issue</a>
+	<a href="#createReport" class="buttonCreateReport" title="Create Report" onclick="getContext().getProjectController().generateReport()">Create Report</a>
+	<a href="#importIssues" class="buttonImportIssue" title="Impoort Issues" onclick="getContext().getProjectController().importIssues()">Import Issues</a>
+</div>
+<div id="issueListPlace" style="width: 100%;">
+	<table id="issueList" style="width: 100%">
+		<thead>
+			<tr>
+				<th style="width: 50px;">UID</th>
+				<th style="width: 50px;">Key</th>
+				<th style="width: 85px;">Issue Type</th>
+				<th>Summary</th>
+				<th style="width: 50px;">Priority</th>
+				<th>Created</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each items}}
+			<tr>
+				<td style="width: 50px;"><input type="hidden" name="issueId"
+					value="{{id}}" /> {{id}}</td>
+				<td style="width: 50px;">{{key}}</td>
+				<td style="width: 85px;">{{type}}</td>
+				<td>{{summary}}</td>
+				<td style="width: 50px;">{{priority}}</td>
+				<td style="width: 85px;">{{createDate}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+<div title="Import Issue" style="display: none;" class="importIssueFormDialog">
+	<form action="{{contextPath}}/action/issue/import/{{projectId}}" method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="submit" value="Upload" />
+	</form>
+</div>

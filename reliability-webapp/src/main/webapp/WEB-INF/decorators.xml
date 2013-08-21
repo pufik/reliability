@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/view/layout">
+
+	<excludes>
+		<pattern>*/script/*</pattern>
+		<pattern>*/style/*</pattern>
+	</excludes>
+
+	<decorator name="internal" page="internalLayout.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+</decorators>

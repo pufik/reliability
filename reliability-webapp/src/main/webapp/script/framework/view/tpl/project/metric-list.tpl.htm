@@ -1,0 +1,13 @@
+<div class="actionMenu">
+	<a href="#showGraph"
+		onclick="getContext().getGraphController().showIssueStatistic()"
+		class="showTypeGraph" title="Show Issue Statistic">Issue Statistic</a>
+</div>
+<div id="metricsListPlace" style="width: 100%;">
+	{{#each items}}
+	<p>
+		<b>{{name}}:</b> {{formattedValue}}
+	</p>
+	{{/each}}
+
+</div>
