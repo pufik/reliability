@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import ua.edu.lp.reliability.facade.dto.IssueDTO;
-import ua.edu.lp.reliability.facade.dto.MessageDTO;
+import ua.edu.lp.reliability.facade.dto.message.MessageDTO;
 
 public interface IssueFacade {
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import ua.edu.lp.reliability.facade.dto.IssueDTO;
-import ua.edu.lp.reliability.facade.dto.MessageDTO;
+import ua.edu.lp.reliability.facade.dto.message.MessageDTO;
 import ua.edu.lp.reliability.facade.issue.IssueFacade;
 import ua.edu.lp.reliability.facade.report.IssueReportFacade;
 import ua.edu.lp.reliability.model.report.issue.ReportIntervalType;

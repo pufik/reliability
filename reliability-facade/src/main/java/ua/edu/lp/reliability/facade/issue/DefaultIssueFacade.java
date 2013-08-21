@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.edu.lp.reliability.facade.converter.Converter;
 import ua.edu.lp.reliability.facade.dto.IssueDTO;
-import ua.edu.lp.reliability.facade.dto.MessageDTO;
 import ua.edu.lp.reliability.facade.dto.UserDTO;
+import ua.edu.lp.reliability.facade.dto.message.MessageDTO;
 import ua.edu.lp.reliability.facade.util.excel.importer.IssueExcelDataImporter;
 import ua.edu.lp.reliability.model.annotation.spring.Facade;
 import ua.edu.lp.reliability.model.issue.Issue;

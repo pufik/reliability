@@ -48,4 +48,21 @@
 		<servlet-name>spring-mvc</servlet-name>
 		<url-pattern>/action/*</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Error handling -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/action/system/error/404</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/action/system/error/500</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>400</error-code>
+		<location>/action/system/error/400</location>
+	</error-page>
+	
 </web-app> 
