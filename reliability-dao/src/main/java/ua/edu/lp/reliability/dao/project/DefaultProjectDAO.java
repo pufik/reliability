@@ -1,15 +1,15 @@
-package ua.edu.lp.reliability.dao.impl;
+package ua.edu.lp.reliability.dao.project;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import ua.edu.lp.reliability.dao.ProjectDAO;
+import ua.edu.lp.reliability.dao.AbstractBaseDAO;
 import ua.edu.lp.reliability.model.project.Project;
 
 @Repository
-public class ProjectDAOImpl extends AbstractBaseDAO<Project, Long> implements ProjectDAO {
+public class DefaultProjectDAO extends AbstractBaseDAO<Project, Long> implements ProjectDAO {
 
 	private static final String PROJECT_GET_ALL = "Project.getAll";
 

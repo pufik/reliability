@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.edu.lp.reliability.dao.ProjectDAO;
+import ua.edu.lp.reliability.dao.project.ProjectDAO;
 import ua.edu.lp.reliability.model.project.Project;
 
 @Service

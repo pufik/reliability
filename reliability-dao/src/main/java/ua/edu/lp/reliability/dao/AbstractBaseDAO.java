@@ -1,4 +1,4 @@
-package ua.edu.lp.reliability.dao.impl;
+package ua.edu.lp.reliability.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import ua.edu.lp.reliability.dao.BaseDAO;
 
 public abstract class AbstractBaseDAO<T, I> implements BaseDAO<T, I> {
 

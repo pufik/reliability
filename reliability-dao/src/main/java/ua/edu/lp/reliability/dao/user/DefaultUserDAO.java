@@ -1,14 +1,14 @@
-package ua.edu.lp.reliability.dao.impl;
+package ua.edu.lp.reliability.dao.user;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import ua.edu.lp.reliability.dao.UserDAO;
+import ua.edu.lp.reliability.dao.AbstractBaseDAO;
 import ua.edu.lp.reliability.model.user.User;
 
 @Repository
-public class UserDAOImpl extends AbstractBaseDAO<User, Long> implements UserDAO {
+public class DefaultUserDAO extends AbstractBaseDAO<User, Long> implements UserDAO {
 
 	@Override
 	protected Class<User> getEntityClass() {
