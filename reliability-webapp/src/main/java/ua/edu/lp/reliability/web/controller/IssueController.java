@@ -45,8 +45,6 @@ public class IssueController {
 	@RequestMapping(value = "/import/{projectId}")
 	public @ResponseBody
 	MessageDTO importIssueFromExcel(@PathVariable(value = "projectId") Long projectId, @RequestParam(value = "file") MultipartFile file) throws IOException {
-		// TODO: Fix to file upload
-		// File file = new File("/var/tmp/resources/issues.xls");
 		MessageDTO message = issueFacade.importIssueFromExcel(projectId, file.getInputStream());
 
 		return message;
@@ -60,6 +58,5 @@ public class IssueController {
 		response.setContentType(Constants.HTTP_CONTENT_TYPE_MS_EXCEL);
 
 		issueReportFacade.generateIssueReport(issues, ReportIntervalType.MOUNTH, response.getOutputStream());
-
 	}
 }

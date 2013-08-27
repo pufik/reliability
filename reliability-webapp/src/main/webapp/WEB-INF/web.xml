@@ -9,6 +9,22 @@
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
+	
+	<!-- Spring application context listener -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:dao-application-context.xml
+			classpath*:service-application-context.xml
+			classpath*:facade-application-context.xml
+			classpath*:sonar-application-context.xml
+			classpath*:math-models-application-context.xml
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>

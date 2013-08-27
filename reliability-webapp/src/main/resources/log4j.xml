@@ -30,7 +30,7 @@
 	</appender>
 
 	<!-- LOGGER LIST -->
-	<logger name="ua.edu.lp.storage">
+	<logger name="ua.edu.lp.reliability">
 		<!-- level info logs -->
 		<level value="INFO" />
 		<appender-ref ref="fileAppender" />
@@ -45,7 +45,7 @@
 		<priority value="INFO"></priority>
 		<!-- log all log entries on console -->
 		<appender-ref ref="consoleAppender" />
-		<!-- push all error logs to mailAppender -->
+		<!-- push all error logs to fileAppender -->
 		<appender-ref ref="fileAppender" />
 	</root>
 
