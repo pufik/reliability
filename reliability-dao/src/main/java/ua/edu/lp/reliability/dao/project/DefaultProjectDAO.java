@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import ua.edu.lp.reliability.dao.AbstractBaseDAO;
 import ua.edu.lp.reliability.model.project.Project;
 
-@Repository
+@Repository("projectDao")
 public class DefaultProjectDAO extends AbstractBaseDAO<Project, Long> implements ProjectDAO {
 
 	private static final String PROJECT_GET_ALL = "Project.getAll";

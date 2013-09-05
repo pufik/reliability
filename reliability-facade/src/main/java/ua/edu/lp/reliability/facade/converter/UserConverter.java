@@ -4,7 +4,7 @@ import ua.edu.lp.reliability.facade.dto.UserDTO;
 import ua.edu.lp.reliability.model.annotation.spring.Converter;
 import ua.edu.lp.reliability.model.user.User;
 
-@Converter
+@Converter("userConverter")
 public class UserConverter extends AbstractConverter<User, UserDTO> {
 
 	@Override

@@ -5,8 +5,7 @@ import java.util.List;
 import ua.edu.lp.reliability.model.metric.Metric;
 import ua.edu.lp.reliability.model.project.Project;
 
-public interface MetricsService {
+public interface MetricService {
 
-	List<Metric> getMetricsProject(Project project);
-
+	List<Metric> getProjectMetrics(Project project);
 }

@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ua.edu.lp.reliability.model.metric.Metric;
@@ -14,10 +14,10 @@ import ua.edu.lp.reliability.model.metric.MetricType;
 import ua.edu.lp.reliability.model.project.Project;
 import ua.edu.lp.reliability.sonar.metric.MetricProvider;
 
-@Service
-public class DefaultMetricsService implements MetricsService {
+@Service("metricService")
+public class DefaultMetricsService implements MetricService {
 
-	@Autowired
+	@Resource(name = "metricProvider")
 	private MetricProvider metricProvider;
 
 	private Collection<MetricType> metricTypes;
@@ -29,7 +29,7 @@ public class DefaultMetricsService implements MetricsService {
 	}
 
 	@Override
-	public List<Metric> getMetricsProject(Project project) {
+	public List<Metric> getProjectMetrics(Project project) {
 		return metricProvider.getMetrics(project.getSettings(), metricTypes);
 	}
 }

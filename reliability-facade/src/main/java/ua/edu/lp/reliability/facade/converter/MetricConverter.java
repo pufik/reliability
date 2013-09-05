@@ -4,7 +4,7 @@ import ua.edu.lp.reliability.facade.dto.MetricDTO;
 import ua.edu.lp.reliability.model.annotation.spring.Converter;
 import ua.edu.lp.reliability.model.metric.Metric;
 
-@Converter
+@Converter("metricConverter")
 public class MetricConverter extends AbstractConverter<Metric, MetricDTO> {
 
 	@Override
@@ -18,7 +18,7 @@ public class MetricConverter extends AbstractConverter<Metric, MetricDTO> {
 		target.setName(source.getName());
 		target.setValue(source.getValue());
 		target.setFormattedValue(source.getFormattedValue());
-		
+
 		return target;
 	}
 

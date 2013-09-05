@@ -2,16 +2,17 @@ package ua.edu.lp.reliability.service.project;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import ua.edu.lp.reliability.dao.project.ProjectDAO;
 import ua.edu.lp.reliability.model.project.Project;
 
-@Service
+@Service("projectService")
 public class DefaultProjectService implements ProjectService {
 
-	@Autowired
+	@Resource(name = "projectDao")
 	private ProjectDAO projectDao;
 
 	@Override

@@ -4,7 +4,7 @@ import ua.edu.lp.reliability.facade.dto.IssueDTO;
 import ua.edu.lp.reliability.model.annotation.spring.Converter;
 import ua.edu.lp.reliability.model.issue.Issue;
 
-@Converter
+@Converter("issueConverter")
 public class IssueConverter extends AbstractConverter<Issue, IssueDTO> {
 
 	@Override
@@ -26,5 +26,4 @@ public class IssueConverter extends AbstractConverter<Issue, IssueDTO> {
 
 		return target;
 	}
-
 }

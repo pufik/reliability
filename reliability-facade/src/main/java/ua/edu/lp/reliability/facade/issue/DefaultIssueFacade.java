@@ -4,7 +4,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.edu.lp.reliability.facade.converter.Converter;
@@ -19,20 +20,20 @@ import ua.edu.lp.reliability.model.user.User;
 import ua.edu.lp.reliability.service.issue.IssueService;
 import ua.edu.lp.reliability.service.project.ProjectService;
 
-@Facade
+@Facade("issueFacade")
 @Transactional
 public class DefaultIssueFacade implements IssueFacade {
 
-	@Autowired
+	@Resource(name = "issueService")
 	private IssueService issueService;
 
-	@Autowired
+	@Resource(name = "projectService")
 	private ProjectService projectService;
 
-	@Autowired
+	@Resource(name = "issueConverter")
 	private Converter<Issue, IssueDTO> issueConverter;
 
-	@Autowired
+	@Resource(name = "userConverter")
 	private Converter<User, UserDTO> userConverter;
 
 	@Override
@@ -45,14 +46,14 @@ public class DefaultIssueFacade implements IssueFacade {
 	@Override
 	public List<IssueDTO> getProjectIssue(Long projectId) {
 		List<IssueDTO> projectIssue = new ArrayList<>();
-		
+
 		Project project = projectService.getDetails(projectId);
 
 		if (project != null) {
 			for (Issue issue : project.getIssues()) {
 				IssueDTO issueDTO = issueConverter.convert(issue);
 				issueDTO.setReporter(userConverter.convert(issue.getReporter()));
-				
+
 				projectIssue.add(issueDTO);
 			}
 		}

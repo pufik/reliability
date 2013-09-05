@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import ua.edu.lp.reliability.dao.AbstractBaseDAO;
 import ua.edu.lp.reliability.model.issue.Issue;
 
-@Repository
+@Repository("issueDao")
 public class DefaultIssueDAO extends AbstractBaseDAO<Issue, Long> implements IssueDAO {
 
 	private static final String ISSUE_GET_ALL = "Issue.getAll";
@@ -22,5 +22,4 @@ public class DefaultIssueDAO extends AbstractBaseDAO<Issue, Long> implements Iss
 	public List<Issue> getAll() {
 		return executeNamedQuery(ISSUE_GET_ALL, Collections.<String, Object> emptyMap());
 	}
-
 }

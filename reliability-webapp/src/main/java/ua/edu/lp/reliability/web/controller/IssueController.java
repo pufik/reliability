@@ -24,10 +24,10 @@ import ua.edu.lp.reliability.web.util.Constants;
 @RequestMapping(value = "/issue")
 public class IssueController {
 
-	@Resource
+	@Resource(name = "issueFacade")
 	private IssueFacade issueFacade;
 
-	@Resource
+	@Resource(name = "issueReportFacade")
 	private IssueReportFacade issueReportFacade;
 
 	@RequestMapping(value = "/all")

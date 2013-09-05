@@ -2,16 +2,17 @@ package ua.edu.lp.reliability.service.issue;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import ua.edu.lp.reliability.dao.issue.IssueDAO;
 import ua.edu.lp.reliability.model.issue.Issue;
 
-@Service
+@Service("issueService")
 public class DefaultIssueService implements IssueService {
 
-	@Autowired
+	@Resource(name = "issueDao")
 	private IssueDAO issueDao;
 
 	@Override

@@ -18,7 +18,7 @@ import ua.edu.lp.reliability.model.metric.Metric;
 import ua.edu.lp.reliability.model.metric.MetricType;
 import ua.edu.lp.reliability.model.metric.SonarSettings;
 
-@Repository
+@Repository("metricProvider")
 public class SonarMetricProvider implements MetricProvider {
 
 	@Override
@@ -56,9 +56,8 @@ public class SonarMetricProvider implements MetricProvider {
 
 		return metrics;
 	}
-	
-	
-	private void getTimeMachine(SonarSettings settings, Collection<MetricType> types){
+
+	private void getTimeMachine(SonarSettings settings, Collection<MetricType> types) {
 		List<Metric> metrics = new LinkedList<>();
 		Sonar sonar = new Sonar(new HttpClient3Connector(new Host(settings.getUrl(), settings.getUserName(), settings.getPassword())));
 

@@ -21,10 +21,10 @@ import ua.edu.lp.reliability.model.report.issue.ReportIntervalType;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-@Facade
+@Facade("issueReportFacade")
 public class DefaultIssueReport implements IssueReportFacade {
 
-	private Logger LOG = LoggerFactory.getLogger(DefaultIssueReport.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultIssueReport.class);
 
 	@Override
 	public void generateIssueReport(List<IssueDTO> issues, ReportIntervalType intervalType, OutputStream output) {

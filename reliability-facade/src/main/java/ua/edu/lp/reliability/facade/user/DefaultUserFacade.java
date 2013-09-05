@@ -1,6 +1,6 @@
 package ua.edu.lp.reliability.facade.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 
 import ua.edu.lp.reliability.facade.converter.Converter;
 import ua.edu.lp.reliability.facade.dto.UserDTO;
@@ -8,20 +8,20 @@ import ua.edu.lp.reliability.model.annotation.spring.Facade;
 import ua.edu.lp.reliability.model.user.User;
 import ua.edu.lp.reliability.service.user.UserService;
 
-@Facade
+@Facade("userFacade")
 public class DefaultUserFacade implements UserFacade {
-	
-	@Autowired
+
+	@Resource(name = "userService")
 	private UserService userService;
-	
-	@Autowired
+
+	@Resource(name = "userConverter")
 	private Converter<User, UserDTO> userConverter;
 
+	@Override
 	public UserDTO getUserInfoById(Long userId) {
 		User user = userService.getUserById(userId);
 		UserDTO userDto = userConverter.convert(user);
-		
+
 		return userDto;
 	}
-
 }

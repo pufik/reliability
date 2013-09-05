@@ -4,7 +4,7 @@ import ua.edu.lp.reliability.facade.dto.ProjectDTO;
 import ua.edu.lp.reliability.model.annotation.spring.Converter;
 import ua.edu.lp.reliability.model.project.Project;
 
-@Converter
+@Converter("projectConverter")
 public class ProjectConverter extends AbstractConverter<Project, ProjectDTO> {
 
 	@Override
