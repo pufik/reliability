@@ -198,4 +198,11 @@ public class Issue implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Issue [id=" + id + ", key=" + key + ", type=" + type + ", status=" + status + ", priority=" + priority + ", resolution=" + resolution
+				+ ", reporter=" + reporter + ", assignee=" + assignee + ", createDate=" + createDate + ", updateDate=" + updateDate //+ ", summary=" + summary
+				+ ", project=" + project + "]";
+	}
 }
