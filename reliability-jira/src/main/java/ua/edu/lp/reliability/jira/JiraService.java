@@ -9,4 +9,6 @@ public interface JiraService {
 
 	List<Issue> getIssueByProject(Project project);
 
+	void importIssueForProject(Project project);
+
 }

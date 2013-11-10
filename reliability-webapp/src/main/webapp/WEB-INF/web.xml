@@ -18,6 +18,7 @@
 			classpath*:service-application-context.xml
 			classpath*:facade-application-context.xml
 			classpath*:sonar-application-context.xml
+			classpath*:jira-application-context.xml
 			classpath*:math-models-application-context.xml
 		</param-value>
 	</context-param>

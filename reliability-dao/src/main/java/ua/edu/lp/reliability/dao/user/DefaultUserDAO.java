@@ -1,6 +1,8 @@
 package ua.edu.lp.reliability.dao.user;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +20,11 @@ public class DefaultUserDAO extends AbstractBaseDAO<User, Long> implements UserD
 	@Override
 	public List<User> getAll() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		Map<String, Object> parameters = Collections.<String, Object> singletonMap("login", login);
+		return executeNamedQuerySingleResult("User.getByLogin", parameters);
 	}
 }

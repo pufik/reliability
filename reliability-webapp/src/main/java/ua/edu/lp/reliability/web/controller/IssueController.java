@@ -49,7 +49,15 @@ public class IssueController {
 
 		return message;
 	}
+	
+	@RequestMapping(value = "/import/jira/{projectId}")
+	public @ResponseBody
+	MessageDTO importIssueFromJira(@PathVariable(value = "projectId") Long projectId) throws IOException {
+		MessageDTO message = issueFacade.importIssueFromJira(projectId);
 
+		return message;
+	}
+	
 	@RequestMapping(value = "/report/project/{projectId}/{fileName}")
 	public void generateIssueReportForProject(@PathVariable(value = "projectId") Long projectId, @PathVariable(value = "fileName") String fileName,
 			HttpServletResponse response) throws IOException {

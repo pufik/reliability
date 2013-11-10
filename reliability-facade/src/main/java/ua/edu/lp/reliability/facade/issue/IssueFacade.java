@@ -13,4 +13,6 @@ public interface IssueFacade {
 	List<IssueDTO> getProjectIssue(Long projectId);
 
 	MessageDTO importIssueFromExcel(Long projectId, InputStream inputStream);
+	
+	MessageDTO importIssueFromJira(Long projectId);
 }

@@ -11,11 +11,16 @@ import ua.edu.lp.reliability.model.user.User;
 public class DefaultUserService implements UserService {
 
 	@Resource(name = "userDao")
-	private UserDAO userDAo;
+	private UserDAO userDao;
 
 	@Override
 	public User getUserById(Long userId) {
-		return userDAo.getById(userId);
+		return userDao.getById(userId);
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		return userDao.getUserByLogin(login);
 	}
 
 }

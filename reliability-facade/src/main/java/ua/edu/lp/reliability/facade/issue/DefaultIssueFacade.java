@@ -12,7 +12,9 @@ import ua.edu.lp.reliability.facade.converter.Converter;
 import ua.edu.lp.reliability.facade.dto.IssueDTO;
 import ua.edu.lp.reliability.facade.dto.UserDTO;
 import ua.edu.lp.reliability.facade.dto.message.MessageDTO;
+import ua.edu.lp.reliability.facade.dto.message.MessageType;
 import ua.edu.lp.reliability.facade.util.excel.importer.IssueExcelDataImporter;
+import ua.edu.lp.reliability.jira.JiraService;
 import ua.edu.lp.reliability.model.annotation.spring.Facade;
 import ua.edu.lp.reliability.model.issue.Issue;
 import ua.edu.lp.reliability.model.project.Project;
@@ -26,6 +28,9 @@ public class DefaultIssueFacade implements IssueFacade {
 
 	@Resource(name = "issueService")
 	private IssueService issueService;
+
+	@Resource(name = "jiraService")
+	private JiraService jiraService;
 
 	@Resource(name = "projectService")
 	private ProjectService projectService;
@@ -74,6 +79,17 @@ public class DefaultIssueFacade implements IssueFacade {
 		}
 
 		projectService.save(project);
+
+		return message;
+	}
+
+	@Override
+	public MessageDTO importIssueFromJira(Long projectId) {
+		MessageDTO message = new MessageDTO(MessageType.INFO);
+
+		Project project = projectService.getDetails(projectId);
+
+		jiraService.importIssueForProject(project);
 
 		return message;
 	}
