@@ -44,7 +44,7 @@ public class IssueExcelDataImporter {
 		issueTypeMapping = new HashMap<>();
 		issueTypeMapping.put(IssueType.TASK.getDescription(), IssueType.TASK);
 		issueTypeMapping.put(IssueType.SUBTASK.getDescription(), IssueType.SUBTASK);
-		issueTypeMapping.put(IssueType.IMPROVMENT.getDescription(), IssueType.IMPROVMENT);
+		issueTypeMapping.put(IssueType.IMPROVEMENT.getDescription(), IssueType.IMPROVEMENT);
 		issueTypeMapping.put(IssueType.BUG.getDescription(), IssueType.BUG);
 		issueTypeMapping.put(IssueType.FEATURE.getDescription(), IssueType.FEATURE);
 		issueTypeMapping.put(IssueType.TEST.getDescription(), IssueType.TEST);

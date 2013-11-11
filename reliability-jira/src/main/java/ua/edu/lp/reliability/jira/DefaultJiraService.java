@@ -1,5 +1,6 @@
 package ua.edu.lp.reliability.jira;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import ua.edu.lp.reliability.jira.utils.JiraUtils;
 import ua.edu.lp.reliability.model.issue.Issue;
+import ua.edu.lp.reliability.model.issue.IssuePriority;
+import ua.edu.lp.reliability.model.issue.IssueType;
 import ua.edu.lp.reliability.model.project.Project;
 import ua.edu.lp.reliability.model.user.User;
 import ua.edu.lp.reliability.utils.Callback;
@@ -70,6 +74,7 @@ public class DefaultJiraService implements JiraService {
 	}
 
 	@Override
+	@Async
 	public void importIssueForProject(Project project) {
 		try {
 			final JiraRestClient restClient = getJiraRestClient();
@@ -85,12 +90,18 @@ public class DefaultJiraService implements JiraService {
 
 				processIssue(searchResult.getIssues(), project);
 			}
+
+			restClient.close();
 		} catch (URISyntaxException e) {
 			LOG.error("Error while parsing URI", e);
 		} catch (InterruptedException e) {
 			LOG.error("Error while execution request to jira", e);
 		} catch (ExecutionException e) {
 			LOG.error("Error while execution request to jira", e);
+		} catch (IOException e) {
+			LOG.error("Can't close Jira rest client", e);
+		} catch (Exception e) {
+			LOG.error("Error while processing Jira response", e);
 		}
 
 	}
@@ -127,11 +138,6 @@ public class DefaultJiraService implements JiraService {
 		issue.setCreateDate(jiraIssue.getCreationDate().toDate());
 		issue.setSummary(jiraIssue.getDescription());
 
-		/*
-		 * if (jiraIssue.getAssignee() != null) { User assignee = new User(); assignee.setFullname(jiraIssue.getAssignee().getDisplayName());
-		 * assignee.setLogin(jiraIssue.getAssignee().getName()); issue.setAssignee(assignee); }
-		 */
-
 		if (jiraIssue.getReporter() != null) {
 			User reporter = new User();
 			reporter.setFullname(jiraIssue.getReporter().getDisplayName());
@@ -139,8 +145,11 @@ public class DefaultJiraService implements JiraService {
 			issue.setReporter(reporter);
 		}
 
-		// jiraIssue.getPriority().getName();
-		// jiraIssue.getIssueType().getName();
+		if (jiraIssue.getPriority() != null) {
+			issue.setPriority(IssuePriority.valueOf(jiraIssue.getPriority().getName().toUpperCase()));
+		}
+
+		issue.setType(JiraUtils.getIssueTypeByJiraIssue(jiraIssue));
 
 		return issue;
 	}

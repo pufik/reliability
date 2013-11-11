@@ -86,6 +86,7 @@ public class DefaultIssueFacade implements IssueFacade {
 	@Override
 	public MessageDTO importIssueFromJira(Long projectId) {
 		MessageDTO message = new MessageDTO(MessageType.INFO);
+		message.setMessage("Jira issues imprort started");
 
 		Project project = projectService.getDetails(projectId);
 

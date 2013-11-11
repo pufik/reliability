@@ -41,7 +41,7 @@ public class IssueReportProvider {
 		populateGeneralCell(wb, headerRow.createCell(8), IssueType.SUBTASK.getDescription());
 		populateGeneralCell(wb, headerRow.createCell(9), IssueType.TEST.getDescription());
 		populateGeneralCell(wb, headerRow.createCell(10), IssueType.FEATURE.getDescription());
-		populateGeneralCell(wb, headerRow.createCell(11), IssueType.IMPROVMENT.getDescription());
+		populateGeneralCell(wb, headerRow.createCell(11), IssueType.IMPROVEMENT.getDescription());
 		populateGeneralCell(wb, headerRow.createCell(12), IssueType.WISH.getDescription());
 
 		int i = 1;
@@ -73,7 +73,7 @@ public class IssueReportProvider {
 			populateIssueTypes(wb, issueRow.createCell(8), issueByTypes.asMap().get(IssueType.SUBTASK));
 			populateIssueTypes(wb, issueRow.createCell(9), issueByTypes.asMap().get(IssueType.TEST));
 			populateIssueTypes(wb, issueRow.createCell(10), issueByTypes.asMap().get(IssueType.FEATURE));
-			populateIssueTypes(wb, issueRow.createCell(11), issueByTypes.asMap().get(IssueType.IMPROVMENT));
+			populateIssueTypes(wb, issueRow.createCell(11), issueByTypes.asMap().get(IssueType.IMPROVEMENT));
 			populateIssueTypes(wb, issueRow.createCell(12), issueByTypes.asMap().get(IssueType.WISH));
 
 			i++;
