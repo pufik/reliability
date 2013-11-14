@@ -13,11 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import ua.edu.lp.reliability.jira.utils.JiraUtils;
 import ua.edu.lp.reliability.model.issue.Issue;
 import ua.edu.lp.reliability.model.issue.IssuePriority;
-import ua.edu.lp.reliability.model.issue.IssueType;
+import ua.edu.lp.reliability.model.jira.JiraSettings;
 import ua.edu.lp.reliability.model.project.Project;
 import ua.edu.lp.reliability.model.user.User;
 import ua.edu.lp.reliability.utils.Callback;
@@ -30,12 +31,9 @@ import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientF
 @Service("jiraService")
 public class DefaultJiraService implements JiraService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DefaultJiraService.class);
+	private static final String PROJECT_JQL = "project=";
 
-	// TODO: Should be moved to settings for each project
-	private static final String USER_NAME = "pufik536";
-	private static final String PASSWORD = "Nata_19871016";
-	private static final String JIRA_HOME_URL = "https://issues.apache.org/jira";
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultJiraService.class);
 
 	@Resource(name = "jiraIssueImportCallback")
 	private Callback<List<Issue>> issueImportCallback;
@@ -43,16 +41,19 @@ public class DefaultJiraService implements JiraService {
 	@Override
 	public List<Issue> getIssueByProject(Project project) {
 		List<Issue> issues = new ArrayList<>();
+		JiraSettings jiraSettings = project.getJiraSettings();
+		Assert.notNull(jiraSettings, "Jira settings for project can't be empty, project: " + project);
+
 		try {
-			final JiraRestClient restClient = getJiraRestClient();
+			final JiraRestClient restClient = getJiraRestClient(jiraSettings);
 			int startAt = 0;
 			int maxResults = 50;
 
-			SearchResult searchResult = requestIssues(restClient, startAt, maxResults);
+			SearchResult searchResult = requestIssues(restClient, jiraSettings.getProjectUid(), startAt, maxResults);
 			int issueCount = searchResult.getTotal();
 
 			while (issueCount > startAt) {
-				searchResult = requestIssues(restClient, startAt, maxResults);
+				searchResult = requestIssues(restClient, jiraSettings.getProjectUid(), startAt, maxResults);
 				startAt = searchResult.getMaxResults() + searchResult.getStartIndex();
 
 				for (com.atlassian.jira.rest.client.api.domain.Issue issue : searchResult.getIssues()) {
@@ -77,15 +78,18 @@ public class DefaultJiraService implements JiraService {
 	@Async
 	public void importIssueForProject(Project project) {
 		try {
-			final JiraRestClient restClient = getJiraRestClient();
+			JiraSettings jiraSettings = project.getJiraSettings();
+			Assert.notNull(jiraSettings, "Jira settings for project can't be empty, project: " + project);
+
+			final JiraRestClient restClient = getJiraRestClient(jiraSettings);
 			int startAt = 0;
 			int maxResults = 50;
 
-			SearchResult searchResult = requestIssues(restClient, startAt, maxResults);
+			SearchResult searchResult = requestIssues(restClient, jiraSettings.getProjectUid(), startAt, maxResults);
 			int issueCount = searchResult.getTotal();
 
 			while (issueCount > startAt) {
-				searchResult = requestIssues(restClient, startAt, maxResults);
+				searchResult = requestIssues(restClient, jiraSettings.getProjectUid(), startAt, maxResults);
 				startAt = searchResult.getMaxResults() + searchResult.getStartIndex();
 
 				processIssue(searchResult.getIssues(), project);
@@ -118,16 +122,17 @@ public class DefaultJiraService implements JiraService {
 
 	}
 
-	private SearchResult requestIssues(final JiraRestClient restClient, int startAt, int maxResults) throws InterruptedException, ExecutionException {
+	private SearchResult requestIssues(final JiraRestClient restClient, String projectUID, int startAt, int maxResults) throws InterruptedException,
+			ExecutionException {
 		SearchResult searchResult;
-		searchResult = restClient.getSearchClient().searchJql("project=JCR", maxResults, startAt, null).get();
+		searchResult = restClient.getSearchClient().searchJql(PROJECT_JQL + projectUID, maxResults, startAt, null).get();
 		return searchResult;
 	}
 
-	private JiraRestClient getJiraRestClient() throws URISyntaxException {
-		URI jiraServerUri = new URI(JIRA_HOME_URL);
+	private JiraRestClient getJiraRestClient(JiraSettings settings) throws URISyntaxException {
+		URI jiraServerUri = new URI(settings.getUrl());
 		JiraRestClientFactory restClientFactory = new AsynchronousJiraRestClientFactory();
-		final JiraRestClient restClient = restClientFactory.createWithBasicHttpAuthentication(jiraServerUri, USER_NAME, PASSWORD);
+		final JiraRestClient restClient = restClientFactory.createWithBasicHttpAuthentication(jiraServerUri, settings.getUserName(), settings.getPassword());
 		return restClient;
 	}
 

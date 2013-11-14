@@ -12,6 +12,7 @@
 		<class>ua.edu.lp.reliability.model.project.Project</class>
 		<class>ua.edu.lp.reliability.model.issue.Issue</class>
 		<class>ua.edu.lp.reliability.model.metric.SonarSettings</class>
+		<class>ua.edu.lp.reliability.model.jira.JiraSettings</class>
 
 
 		<properties>

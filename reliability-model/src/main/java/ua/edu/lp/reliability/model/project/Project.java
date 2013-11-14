@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ua.edu.lp.reliability.model.issue.Issue;
+import ua.edu.lp.reliability.model.jira.JiraSettings;
 import ua.edu.lp.reliability.model.metric.SonarSettings;
 
 @Entity
@@ -47,6 +48,10 @@ public class Project implements Serializable {
 
 	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL)
 	private SonarSettings settings;
+	
+	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL)
+	private JiraSettings jiraSettings;
+	
 
 	public Long getId() {
 		return id;
@@ -99,6 +104,14 @@ public class Project implements Serializable {
 
 	public void setSettings(SonarSettings settings) {
 		this.settings = settings;
+	}
+	
+	public JiraSettings getJiraSettings() {
+		return jiraSettings;
+	}
+
+	public void setJiraSettings(JiraSettings jiraSettings) {
+		this.jiraSettings = jiraSettings;
 	}
 
 	@Override
