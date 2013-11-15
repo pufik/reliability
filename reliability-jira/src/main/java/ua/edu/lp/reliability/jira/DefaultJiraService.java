@@ -77,11 +77,12 @@ public class DefaultJiraService implements JiraService {
 	@Override
 	@Async
 	public void importIssueForProject(Project project) {
+		JiraRestClient restClient = null;
 		try {
 			JiraSettings jiraSettings = project.getJiraSettings();
 			Assert.notNull(jiraSettings, "Jira settings for project can't be empty, project: " + project);
 
-			final JiraRestClient restClient = getJiraRestClient(jiraSettings);
+			restClient = getJiraRestClient(jiraSettings);
 			int startAt = 0;
 			int maxResults = 50;
 
@@ -94,20 +95,21 @@ public class DefaultJiraService implements JiraService {
 
 				processIssue(searchResult.getIssues(), project);
 			}
-
-			restClient.close();
 		} catch (URISyntaxException e) {
 			LOG.error("Error while parsing URI", e);
 		} catch (InterruptedException e) {
 			LOG.error("Error while execution request to jira", e);
 		} catch (ExecutionException e) {
 			LOG.error("Error while execution request to jira", e);
-		} catch (IOException e) {
-			LOG.error("Can't close Jira rest client", e);
 		} catch (Exception e) {
 			LOG.error("Error while processing Jira response", e);
+		} finally {
+			try {
+				restClient.close();
+			} catch (IOException e) {
+				LOG.error("Can't close Jira rest client", e);
+			}
 		}
-
 	}
 
 	public void processIssue(Iterable<com.atlassian.jira.rest.client.api.domain.Issue> jiraIssues, Project project) {
