@@ -16,12 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import ua.edu.lp.reliability.jira.utils.JiraUtils;
+import ua.edu.lp.reliability.model.event.JiraIssueImportEvent;
 import ua.edu.lp.reliability.model.issue.Issue;
 import ua.edu.lp.reliability.model.issue.IssuePriority;
 import ua.edu.lp.reliability.model.jira.JiraSettings;
 import ua.edu.lp.reliability.model.project.Project;
 import ua.edu.lp.reliability.model.user.User;
-import ua.edu.lp.reliability.utils.Callback;
+import ua.edu.lp.reliability.service.event.ApplicationEventPublisher;
 
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.JiraRestClientFactory;
@@ -31,12 +32,12 @@ import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientF
 @Service("jiraService")
 public class DefaultJiraService implements JiraService {
 
-	private static final String PROJECT_JQL = "project=";
-
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultJiraService.class);
 
-	@Resource(name = "jiraIssueImportCallback")
-	private Callback<List<Issue>> issueImportCallback;
+	private static final String PROJECT_JQL = "project=";
+	
+	@Resource(name="defaultApplicationEventPublisher")
+	private ApplicationEventPublisher applicationEventPublisher;
 
 	@Override
 	public List<Issue> getIssueByProject(Project project) {
@@ -119,8 +120,8 @@ public class DefaultJiraService implements JiraService {
 			issues.add(convertIssue(issue, project));
 		}
 
-		// Do async callback for issue processing
-		issueImportCallback.execute(issues);
+		// Send event
+		applicationEventPublisher.publishEvent(new JiraIssueImportEvent(issues));
 
 	}
 
