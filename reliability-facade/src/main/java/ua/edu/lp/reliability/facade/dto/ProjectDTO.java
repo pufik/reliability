@@ -11,6 +11,8 @@ public class ProjectDTO {
 	private String description;
 
 	private Date createDate;
+	
+	private JiraSettingsDTO jiraSettings;
 
 	public Long getId() {
 		return id;
@@ -42,5 +44,13 @@ public class ProjectDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public JiraSettingsDTO getJiraSettings() {
+		return jiraSettings;
+	}
+
+	public void setJiraSettings(JiraSettingsDTO jiraSettings) {
+		this.jiraSettings = jiraSettings;
 	}
 }

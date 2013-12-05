@@ -5,8 +5,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import ua.edu.lp.reliability.facade.converter.Converter;
+import ua.edu.lp.reliability.facade.dto.JiraSettingsDTO;
 import ua.edu.lp.reliability.facade.dto.ProjectDTO;
 import ua.edu.lp.reliability.model.annotation.spring.Facade;
+import ua.edu.lp.reliability.model.jira.JiraSettings;
 import ua.edu.lp.reliability.model.project.Project;
 import ua.edu.lp.reliability.service.project.ProjectService;
 
@@ -19,6 +21,9 @@ public class DefaultProjectFacade implements ProjectFacade {
 	@Resource(name = "projectConverter")
 	private Converter<Project, ProjectDTO> projectConverter;
 
+	@Resource(name = "jiraSettingsConverter")
+	private Converter<JiraSettings, JiraSettingsDTO> jiraSettingsConverter;
+
 	@Override
 	public List<ProjectDTO> getAll() {
 		List<Project> projects = projectService.getAll();
@@ -29,7 +34,12 @@ public class DefaultProjectFacade implements ProjectFacade {
 	@Override
 	public ProjectDTO getProjectDetails(Long projectId) {
 		Project project = projectService.getDetails(projectId);
+		ProjectDTO projectDto = projectConverter.convert(project);
 
-		return projectConverter.convert(project);
+		if (project.getJiraSettings() != null) {
+			projectDto.setJiraSettings(jiraSettingsConverter.convert(project.getJiraSettings()));
+		}
+
+		return projectDto;
 	}
 }

@@ -20,12 +20,23 @@
 			classpath*:sonar-application-context.xml
 			classpath*:jira-application-context.xml
 			classpath*:math-models-application-context.xml
+			classpath*:security-context.xml
 		</param-value>
 	</context-param>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<filter>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<url-pattern>/action/*</url-pattern>
+	</filter-mapping>
 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
