@@ -7,11 +7,11 @@ public abstract class ApplicationEvent<SOURCE> extends org.springframework.conte
 	public ApplicationEvent(SOURCE source) {
 		super(source);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
-	public SOURCE getSource(){
-		//TODO: IP - avoid cast
+	public SOURCE getSource() {
+		// TODO: IP - avoid cast
 		return (SOURCE) super.getSource();
 	}
 }

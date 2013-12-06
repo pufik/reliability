@@ -13,6 +13,7 @@
 		<module>reliability-facade</module>
 		<module>reliability-service</module>
 		<module>reliability-sonar</module>
+                <module>reliability-mail</module>
         <module>reliability-jira</module>
 		<module>reliability-math-models</module>
 		<module>reliability-dao</module>
