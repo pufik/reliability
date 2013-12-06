@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import ua.edu.lp.reliability.dao.exception.ModelNotFoundException;
 
 public abstract class AbstractBaseDAO<T, I> implements BaseDAO<T, I> {
 
@@ -44,19 +47,27 @@ public abstract class AbstractBaseDAO<T, I> implements BaseDAO<T, I> {
 		for (String key : parameters.keySet()) {
 			query.setParameter(key, parameters.get(key));
 		}
-		
-		
+
 		return (List<T>) query.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	protected T executeNamedQuerySingleResult(String queryName, Map<String, Object> parameters) {
-		Query query = entityManager.createNamedQuery(queryName);
 
-		for (String key : parameters.keySet()) {
-			query.setParameter(key, parameters.get(key));
+		T entity = null;
+		try {
+			Query query = entityManager.createNamedQuery(queryName);
+
+			for (String key : parameters.keySet()) {
+				query.setParameter(key, parameters.get(key));
+			}
+
+			entity = (T) query.getSingleResult();
+
+		} catch (NoResultException ex) {
+			throw new ModelNotFoundException(ex);
 		}
 
-		return (T) query.getSingleResult();
+		return entity;
 	}
 }

@@ -4,7 +4,8 @@ import ua.edu.lp.reliability.dao.BaseDAO;
 import ua.edu.lp.reliability.model.user.User;
 
 public interface UserDAO extends BaseDAO<User, Long> {
-	
+
 	User getUserByLogin(String login);
-	
+
+	User getByLoginAndPassword(String login, String password);
 }

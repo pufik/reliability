@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +21,8 @@ import ua.edu.lp.reliability.model.issue.Issue;
 @Entity
 @Table(name = "user")
 @NamedQueries({
-	@NamedQuery(name = "User.getByLogin", query = "SELECT u FROM User u WHERE login = :login")
+	@NamedQuery(name = "User.getByLogin", query = "SELECT u FROM User u WHERE login = :login"),
+	@NamedQuery(name = "User.getByLoginAndPassword", query = "SELECT u FROM User u WHERE login = :login AND password =:password")
 })
 public class User implements Serializable {
 
@@ -38,6 +41,10 @@ public class User implements Serializable {
 
 	@Column(name = "full_name")
 	private String fullname;
+
+	@Column(name = "role", nullable = false)
+	@Enumerated(value = EnumType.STRING)
+	private UserRole role;
 
 	@OneToMany(mappedBy = "reporter", fetch = FetchType.LAZY)
 	private Set<Issue> reportedIssue;
@@ -101,5 +108,13 @@ public class User implements Serializable {
 	public void addAssignedIssue(Issue issue) {
 		this.assignedIssue.add(issue);
 		issue.setAssignee(this);
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 }
