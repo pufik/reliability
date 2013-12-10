@@ -32,13 +32,13 @@ public class DefaultEmailService implements EmailService {
 		MimeMessageHelper messageHelper = new MimeMessageHelper(message);
 		try {
 			messageHelper.setFrom(email.getSender());
-			messageHelper.setTo(email.getRecipients().toArray(new String[]{}));
-			messageHelper.setCc(email.getCcRecipients().toArray(new String[]{}));
-			
+			messageHelper.setTo(email.getRecipients().toArray(new String[] {}));
+			messageHelper.setCc(email.getCcRecipients().toArray(new String[] {}));
+			messageHelper.setText(email.getContent());
+
 			mailSender.send(message);
 		} catch (MessagingException e) {
 			LOG.error("Send email message exception", e);
 		}
-
 	}
 }

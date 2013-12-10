@@ -21,6 +21,7 @@
 			classpath*:jira-application-context.xml
 			classpath*:math-models-application-context.xml
 			classpath*:security-context.xml
+			classpath*:mail-application-context.xml
 		</param-value>
 	</context-param>
 

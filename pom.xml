@@ -13,7 +13,7 @@
 		<module>reliability-facade</module>
 		<module>reliability-service</module>
 		<module>reliability-sonar</module>
-                <module>reliability-mail</module>
+        <module>reliability-mail</module>
         <module>reliability-jira</module>
 		<module>reliability-math-models</module>
 		<module>reliability-dao</module>
@@ -37,6 +37,12 @@
 		<db.user.password>123456</db.user.password>
 		<jpa.database>MYSQL</jpa.database>
 		<jpa.showSql>true</jpa.showSql>
+		
+		<!-- Mail settings -->
+		<mail.service.host>company</mail.service.host>
+		<mail.service.username>username.company</mail.service.username>
+		<mail.service.password>password</mail.service.password>
+				
 	</properties>
 
 	<dependencies>
