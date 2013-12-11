@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +22,9 @@ import ua.edu.lp.reliability.web.util.View;
 @RequestMapping("/project")
 public class ProjectController {
 
-	@Autowired
+	@Resource(name = "projectFacade")
 	private ProjectFacade projectFacade;
-	
+
 	@Resource(name = "emailService")
 	private EmailService emailService;
 
@@ -45,17 +44,19 @@ public class ProjectController {
 	ProjectDTO getProjectInfo(@PathVariable(value = "projectId") Long projectId) {
 		return projectFacade.getProjectDetails(projectId);
 	}
-	
+
 	@RequestMapping(value = "/mail", method = RequestMethod.GET)
-	public MessageDTO sendEmail(){
+	public @ResponseBody
+	MessageDTO sendEmail() {
+		// TODO: TMP stuff, should be removed
 		Email email = new Email();
 		email.setSender("iurii@i.com");
 		email.setRecipients(Collections.singletonList("pufik536@gmail.com"));
 		email.setSubject("Reliability System: Issue import");
 		email.setContent("Hello world!!!");
-		
+
 		emailService.send(email);
-		
+
 		return new MessageDTO();
 	}
 }

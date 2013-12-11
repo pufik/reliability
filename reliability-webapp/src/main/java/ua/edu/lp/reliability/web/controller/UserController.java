@@ -1,6 +1,7 @@
 package ua.edu.lp.reliability.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,7 @@ import ua.edu.lp.reliability.facade.user.UserFacade;
 @RequestMapping(value = "/user")
 public class UserController {
 
-	@Autowired
+	@Resource(name = "userFacade")
 	private UserFacade userFacade;
 
 	@RequestMapping(value = "/info/{userId}", method = RequestMethod.GET)

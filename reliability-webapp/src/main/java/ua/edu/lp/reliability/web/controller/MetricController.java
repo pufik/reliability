@@ -2,7 +2,8 @@ package ua.edu.lp.reliability.web.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import ua.edu.lp.reliability.facade.metric.MetricFacade;
 @RequestMapping(value = "/metrics")
 public class MetricController {
 
-	@Autowired
+	@Resource(name = "metricFacade")
 	private MetricFacade metricFacade;
 
 	@RequestMapping(value = "/project/{projectId}")
