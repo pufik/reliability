@@ -34,6 +34,7 @@ public class DefaultEmailService implements EmailService {
 			messageHelper.setFrom(email.getSender());
 			messageHelper.setTo(email.getRecipients().toArray(new String[] {}));
 			messageHelper.setCc(email.getCcRecipients().toArray(new String[] {}));
+			messageHelper.setSubject(email.getSubject());
 			messageHelper.setText(email.getContent());
 
 			mailSender.send(message);

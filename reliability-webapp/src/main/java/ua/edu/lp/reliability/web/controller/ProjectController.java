@@ -49,7 +49,7 @@ public class ProjectController {
 	@RequestMapping(value = "/mail", method = RequestMethod.GET)
 	public MessageDTO sendEmail(){
 		Email email = new Email();
-		email.setSender("Iurii: <iurii@i.com>");
+		email.setSender("iurii@i.com");
 		email.setRecipients(Collections.singletonList("pufik536@gmail.com"));
 		email.setSubject("Reliability System: Issue import");
 		email.setContent("Hello world!!!");
