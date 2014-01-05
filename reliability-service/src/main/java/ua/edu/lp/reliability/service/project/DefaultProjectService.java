@@ -26,8 +26,17 @@ public class DefaultProjectService implements ProjectService {
 	}
 
 	@Override
+	public void create(Project project) {
+		projectDao.create(project);
+	}
+
+	@Override
 	public void save(Project project) {
 		projectDao.update(project);
 	}
 
+	@Override
+	public void remove(Project project) {
+		projectDao.remove(project);
+	}
 }

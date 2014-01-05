@@ -128,4 +128,27 @@ function ProjectPresenter(context) {
 			}
 		});
 	};
+	
+	this.showProjectCreateDialog = function() {		
+		templateProvider.getContent("/project/project-add-dialog.tpl", {}, this.showProjectCreateDialogViewRender);
+	};
+	
+	this.showProjectCreateDialogViewRender = function(content) {		
+		$(content).dialog({
+			width : 480,
+			height: 300,
+			modal : true,
+			close : function() {
+				$(this).remove();
+			},
+			buttons: {
+				"Create": function(){
+					$("#projectCreateForm").submit();
+				},
+				"Close": function(){
+					$(this).dialog("close");
+				}
+			}
+		});
+	};
 }

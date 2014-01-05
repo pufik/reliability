@@ -10,5 +10,9 @@ public interface ProjectService {
 
 	Project getDetails(Long projectId);
 
+	void create(Project project);
+
 	void save(Project project);
+	
+	void remove(Project project);
 }

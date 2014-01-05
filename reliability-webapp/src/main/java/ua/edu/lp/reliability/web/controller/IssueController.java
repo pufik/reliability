@@ -22,7 +22,7 @@ import ua.edu.lp.reliability.web.util.Constants;
 
 @Controller
 @RequestMapping(value = "/issue")
-public class IssueController {
+public class IssueController extends BaseController{
 
 	@Resource(name = "issueFacade")
 	private IssueFacade issueFacade;

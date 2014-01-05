@@ -1,5 +1,4 @@
 function getDataByAjax(context) {
-	var resultData = "";
 	jQuery.ajax({
 		url : context.pageUrl,
 		type : context.reqType,

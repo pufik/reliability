@@ -50,4 +50,29 @@ function ProjectController(context) {
 	this.importIssues = function(){
 		projectPresenter.showImportIssueDialog();
 	};
+	
+	this.getCreateProjectDialog = function(){
+		projectPresenter.showProjectCreateDialog();
+	};
+	
+	this.createProject = function(){
+		var project = new Project();
+		console.log("Create project request");
+		
+		project.name = $("#projectName").val();
+		project.description = $("#projectDescription").val();
+		projectDao.createProject(project, this.createProjectResponseHandler);
+		
+		return false;
+	};
+	
+	this.createProjectResponseHandler = function(message){
+		if(message.type == "INFO"){
+			$("#projectCreateDialog").remove();
+			context.getProjectController().getAll();
+		}else{
+			$("#projectCreateError").text(message.message);
+			$("#projectCreateError").show();
+		}
+	};
 }

@@ -6,6 +6,8 @@
 <head>
 <title>Projects</title>
 <script type="text/javascript"
+	src="${contextPath}/script/framework/model/project-model.js"></script>
+<script type="text/javascript"
 	src="${contextPath}/script/framework/controller/project-controller.js"></script>
 <script type="text/javascript"
 	src="${contextPath}/script/framework/data/project-dao.js"></script>

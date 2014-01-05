@@ -14,7 +14,7 @@ import ua.edu.lp.reliability.web.util.Constants;
 
 @Controller
 @RequestMapping("/system")
-public class SystemController {
+public class SystemController extends BaseController {
 
 	@RequestMapping(value = "/error/{errorCode}")
 	@ResponseBody
@@ -25,7 +25,7 @@ public class SystemController {
 		String message = (String) request.getAttribute(Constants.HTTP_ERROR_MESSAGE_ATTR_NAME);
 
 		if (StringUtils.isEmpty(message)) {
-			//TODO: Fix getting message from Exception. 
+			// TODO: Fix getting message from Exception.
 			Throwable exception = (Throwable) request.getAttribute(Constants.HTTP_ERROR_EXCEPTION_ATTR_NAME);
 			message = (exception != null) ? exception.toString() : StringUtils.EMPTY;
 		}

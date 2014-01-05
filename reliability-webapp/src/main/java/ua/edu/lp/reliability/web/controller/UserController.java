@@ -13,7 +13,7 @@ import ua.edu.lp.reliability.facade.user.UserFacade;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController extends BaseController {
 
 	@Resource(name = "userFacade")
 	private UserFacade userFacade;

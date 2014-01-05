@@ -55,9 +55,7 @@
 
 			<div id="navigation">
 				<ul>
-					<li><a href="${contextPath}/action/hello" class="active">Home</a></li>
 					<li><a href="${contextPath}/action/project/main">Projects</a></li>
-					<li><a href="${contextPath}/action/user/info/10">About</a></li>
 				</ul>
 				<div class="cl">&nbsp;</div>
 			</div>

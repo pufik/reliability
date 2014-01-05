@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import ua.edu.lp.reliability.dao.exception.ModelNotFoundException;
 
@@ -40,29 +40,27 @@ public abstract class AbstractBaseDAO<T, I> implements BaseDAO<T, I> {
 		entityManager.flush();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<T> executeNamedQuery(String queryName, Map<String, Object> parameters) {
-		Query query = entityManager.createNamedQuery(queryName);
+		TypedQuery<T> query = entityManager.createNamedQuery(queryName, getEntityClass());
 
 		for (String key : parameters.keySet()) {
 			query.setParameter(key, parameters.get(key));
 		}
 
-		return (List<T>) query.getResultList();
+		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected T executeNamedQuerySingleResult(String queryName, Map<String, Object> parameters) {
-
 		T entity = null;
+		
 		try {
-			Query query = entityManager.createNamedQuery(queryName);
+			TypedQuery<T> query = entityManager.createNamedQuery(queryName, getEntityClass());
 
 			for (String key : parameters.keySet()) {
 				query.setParameter(key, parameters.get(key));
 			}
 
-			entity = (T) query.getSingleResult();
+			entity = query.getSingleResult();
 
 		} catch (NoResultException ex) {
 			throw new ModelNotFoundException(ex);

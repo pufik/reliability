@@ -9,4 +9,8 @@ public interface ProjectFacade {
 	List<ProjectDTO> getAll();
 	
 	ProjectDTO getProjectDetails(Long projectId);
+	
+	void createProject(ProjectDTO project);
+	
+	void removeProject(Long projectId);
 }

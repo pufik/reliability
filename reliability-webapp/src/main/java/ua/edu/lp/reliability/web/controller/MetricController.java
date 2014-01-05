@@ -14,7 +14,7 @@ import ua.edu.lp.reliability.facade.metric.MetricFacade;
 
 @Controller
 @RequestMapping(value = "/metrics")
-public class MetricController {
+public class MetricController extends BaseController {
 
 	@Resource(name = "metricFacade")
 	private MetricFacade metricFacade;

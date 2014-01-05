@@ -1,18 +1,23 @@
 package ua.edu.lp.reliability.web.controller;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ua.edu.lp.reliability.facade.dto.ProjectDTO;
 import ua.edu.lp.reliability.facade.dto.message.MessageDTO;
+import ua.edu.lp.reliability.facade.dto.message.MessageType;
 import ua.edu.lp.reliability.facade.project.ProjectFacade;
 import ua.edu.lp.reliability.mail.service.EmailService;
 import ua.edu.lp.reliability.model.email.Email;
@@ -20,7 +25,9 @@ import ua.edu.lp.reliability.web.util.View;
 
 @Controller
 @RequestMapping("/project")
-public class ProjectController {
+public class ProjectController extends BaseController {
+
+	private static final Logger LOG = LoggerFactory.getLogger(ProjectController.class);
 
 	@Resource(name = "projectFacade")
 	private ProjectFacade projectFacade;
@@ -43,6 +50,27 @@ public class ProjectController {
 	public @ResponseBody
 	ProjectDTO getProjectInfo(@PathVariable(value = "projectId") Long projectId) {
 		return projectFacade.getProjectDetails(projectId);
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	MessageDTO createProject(@RequestBody ProjectDTO project) {
+		LOG.info("Start process project create request:" + project.getName());
+		project.setCreateDate(new Date());
+
+		projectFacade.createProject(project);
+
+		return new MessageDTO(MessageType.INFO, "Project created");
+	}
+
+	@RequestMapping(value = "/remove/{projectId}", method = RequestMethod.DELETE)
+	public @ResponseBody
+	MessageDTO removeProject(@PathVariable("projectId") Long projectId) {
+		LOG.info("Start process  remove project ID: " + projectId);
+
+		projectFacade.removeProject(projectId);
+
+		return new MessageDTO(MessageType.INFO, "Project removed");
 	}
 
 	@RequestMapping(value = "/mail", method = RequestMethod.GET)

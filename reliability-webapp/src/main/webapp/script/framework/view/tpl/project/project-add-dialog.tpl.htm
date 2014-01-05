@@ -1,0 +1,11 @@
+<div title="Create Project" id="projectCreateDialog">
+	<form style="margin: 0 auto;" id="projectCreateForm" onsubmit="getContext().getProjectController().createProject(); return false;" >
+		<label for="projectName" style="font-weight: bold;">Name:</label>
+		<input type="text" name="projectName" id="projectName" style="width: 400px;"/>
+		<br />
+		<label for="projectDescription" style="font-weight: bold;">Description:</label>
+		<br />
+		<textarea name="projectDescription" id="projectDescription" style="width: 445px; height: 100px;"></textarea>
+	</form>
+	<span style="display: none; color: red; font-weight: bold" id="projectCreateError"></span>
+</div>
