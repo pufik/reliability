@@ -7,12 +7,14 @@ public class ProjectDTO {
 	private Long id;
 
 	private String name;
-	
+
 	private String description;
 
 	private Date createDate;
-	
+
 	private JiraSettingsDTO jiraSettings;
+
+	private SonarSettingsDTO sonarSettings;
 
 	public Long getId() {
 		return id;
@@ -52,5 +54,13 @@ public class ProjectDTO {
 
 	public void setJiraSettings(JiraSettingsDTO jiraSettings) {
 		this.jiraSettings = jiraSettings;
+	}
+
+	public SonarSettingsDTO getSonarSettings() {
+		return sonarSettings;
+	}
+
+	public void setSonarSettings(SonarSettingsDTO sonarSettings) {
+		this.sonarSettings = sonarSettings;
 	}
 }

@@ -8,6 +8,7 @@
 		<li><a href="#bugTab"><span>Issues</span></a></li>
 		<li><a href="#metricTab"><span>Metrics</span></a></li>
 		<li><a href="#reliabilityTab"><span>Reliability</span></a></li>
+		<li><a href="#settingsTab"><span>Settings</span></a></li>
 	</ul>
 	<div id="infoTab">
 		<p>
@@ -23,4 +24,57 @@
 	<div id="bugTab" class="ui-helper-clearfix"></div>
 	<div id="metricTab" class="ui-helper-clearfix"></div>
 	<div id="reliabilityTab" class="ui-helper-clearfix">Reliability</div>
+	<div id="settingsTab" class="ui-helper-clearfix">
+	<div>
+		<span style="font-weight: bold;">Jira connection settings</span>
+		<hr />
+			<form>
+				<input type="hidden" name="jiraSettingsId" id="jiraSettingsId" value="{{jiraSettings.id}}"/>
+				<label for="jiraUserName" style="font-weight: bold; margin-top: 10px;">Username:</label>
+				<input type="text" name="jiraUserName" id="jiraUserName" value="{{jiraSettings.userName}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<label for="jiraUserPassword" style="font-weight: bold; margin-top: 10px;">Password:</label>
+				<input type="password" name="jiraUserPassword" id="jiraUserPassword" value="{{jiraSettings.password}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<label for="jiraProjectUid" style="font-weight: bold; margin-top: 10px;">Project UID:</label>
+				<input type="text" name="jiraProjectUid" id="jiraProjectUid" value="{{jiraSettings.projectUid}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<label for="jiraUrl" style="font-weight: bold; margin-top: 10px;">Jira location URL:</label>
+				<input type="text" name="jiraUrl" id="jiraUrl" value="{{jiraSettings.url}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<div style="margin-top: 10px; margin-bottom: 10px">
+				<a href="#clearJiraSettings" class="clearJiraSettings" >Clear</a>
+				<a href="#saveJiraSettings" class="saveJiraSettings" onclick="getContext().getProjectController().saveJiraSettings()">Save</a>
+				</div>
+			</form>
+		<hr />
+		<br />
+		
+		<span style="font-weight: bold;">Sonar connection settings</span>
+		<hr />
+			<form>
+				<input type="hidden" name="sonarSettingsId" id="sonarSettingsId" value="{{sonarSettings.id}}"/>
+				<label for="sonarUserName" style="font-weight: bold; margin-top: 10px;">Username:</label>
+				<input type="text" name="sonarUserName" id="sonarUserName" value="{{sonarSettings.userName}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<label for="sonarUserPassword" style="font-weight: bold; margin-top: 10px;">Password:</label>
+				<input type="password" name="sonarUserPassword" id="sonarUserPassword" value="{{sonarSettings.password}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<label for="sonarProjectUid" style="font-weight: bold; margin-top: 10px;">Project UID:</label>
+				<input type="text" name="sonarProjectUid" id="sonarProjectUid" value="{{sonarSettings.projectUid}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<label for="sonarUrl" style="font-weight: bold; margin-top: 10px;">Sonar location URL:</label>
+				<input type="text" name="sonarUrl" id="jsonarUrl" value="{{sonarSettings.url}}" style="width: 500px; margin-top: 10px;" />
+				<br />
+				<div style="margin-top: 10px; margin-bottom: 10px">
+				<a href="#clearSonarSettings" class="clearSonarSettings">Clear</a>
+				<a href="#saveSonarSettings" class="saveSonarSettings">Save</a>
+				</div>
+			</form>
+		<hr />
+		<br />
+		
+	</div>
+	
+	</div>
 </div>

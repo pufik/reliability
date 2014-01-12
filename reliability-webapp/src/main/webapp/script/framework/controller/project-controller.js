@@ -75,4 +75,15 @@ function ProjectController(context) {
 			$("#projectCreateError").show();
 		}
 	};
+	
+	this.saveJiraSettings = function(){
+		var jiraSettings = {};
+		jiraSettings.id = $("#jiraSettingsId").val();
+		jiraSettings.userName = $("#jiraUserName").val();
+		jiraSettings.password = $("#jiraUserPassword").val();
+		jiraSettings.projectUid = $("#jiraProjectUid").val();
+		jiraSettings.url = $("#jiraUrl").val();
+		
+		console.log(jiraSettings);
+	};
 }

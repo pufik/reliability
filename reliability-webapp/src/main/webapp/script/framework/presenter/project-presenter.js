@@ -66,6 +66,11 @@ function ProjectPresenter(context) {
 				}
 			}
 		});
+		
+		$(".saveSonarSettings").button({ icons: {primary:'ui-icon-disk'}});
+		$(".clearSonarSettings").button({ icons: {primary:'ui-icon-shuffle'}});
+		$(".saveJiraSettings").button({ icons: {primary:'ui-icon-disk'}});
+		$(".clearJiraSettings").button({ icons: {primary:'ui-icon-shuffle'}});
 	};
 	
 	this.showBugsView = function(issues) {

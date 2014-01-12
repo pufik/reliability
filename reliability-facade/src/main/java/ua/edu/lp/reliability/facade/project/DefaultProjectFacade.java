@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.edu.lp.reliability.facade.converter.Converter;
 import ua.edu.lp.reliability.facade.dto.JiraSettingsDTO;
 import ua.edu.lp.reliability.facade.dto.ProjectDTO;
+import ua.edu.lp.reliability.facade.dto.SonarSettingsDTO;
 import ua.edu.lp.reliability.model.annotation.spring.Facade;
 import ua.edu.lp.reliability.model.jira.JiraSettings;
+import ua.edu.lp.reliability.model.metric.SonarSettings;
 import ua.edu.lp.reliability.model.project.Project;
 import ua.edu.lp.reliability.service.project.ProjectService;
 
@@ -30,6 +32,9 @@ public class DefaultProjectFacade implements ProjectFacade {
 	@Resource(name = "jiraSettingsConverter")
 	private Converter<JiraSettings, JiraSettingsDTO> jiraSettingsConverter;
 
+	@Resource(name = "sonarSettingsConverter")
+	private Converter<SonarSettings, SonarSettingsDTO> sonarSettingsConverter;
+
 	@Override
 	public List<ProjectDTO> getAll() {
 		List<Project> projects = projectService.getAll();
@@ -44,6 +49,10 @@ public class DefaultProjectFacade implements ProjectFacade {
 
 		if (project.getJiraSettings() != null) {
 			projectDto.setJiraSettings(jiraSettingsConverter.convert(project.getJiraSettings()));
+		}
+
+		if (project.getSettings() != null) {
+			projectDto.setSonarSettings(sonarSettingsConverter.convert(project.getSettings()));
 		}
 
 		return projectDto;

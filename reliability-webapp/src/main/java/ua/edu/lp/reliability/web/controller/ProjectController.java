@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ua.edu.lp.reliability.facade.dto.JiraSettingsDTO;
 import ua.edu.lp.reliability.facade.dto.ProjectDTO;
+import ua.edu.lp.reliability.facade.dto.SonarSettingsDTO;
 import ua.edu.lp.reliability.facade.dto.message.MessageDTO;
 import ua.edu.lp.reliability.facade.dto.message.MessageType;
 import ua.edu.lp.reliability.facade.project.ProjectFacade;
@@ -66,11 +68,27 @@ public class ProjectController extends BaseController {
 	@RequestMapping(value = "/remove/{projectId}", method = RequestMethod.DELETE)
 	public @ResponseBody
 	MessageDTO removeProject(@PathVariable("projectId") Long projectId) {
-		LOG.info("Start process  remove project ID: " + projectId);
+		LOG.info("Start process request to remove project ID: " + projectId);
 
 		projectFacade.removeProject(projectId);
 
 		return new MessageDTO(MessageType.INFO, "Project removed");
+	}
+
+	@RequestMapping(value = "/settings/jira/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody
+	MessageDTO saveJiraSettings(@PathVariable("projectId") Long projectId, @RequestBody JiraSettingsDTO jiraSettings) {
+		LOG.info("Save Jira settings for project id: " + projectId);
+
+		return new MessageDTO(MessageType.INFO, "Jira coneection settings saved");
+	}
+
+	@RequestMapping(value = "/settings/sonar/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody
+	MessageDTO saveSonarSettings(@PathVariable("projectId") Long projectId, @RequestBody SonarSettingsDTO jiraSettings) {
+		LOG.info("Save Sonar settings for project id: " + projectId);
+
+		return new MessageDTO(MessageType.INFO, "Sonar coneection settings saved");
 	}
 
 	@RequestMapping(value = "/mail", method = RequestMethod.GET)
