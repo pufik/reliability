@@ -1,6 +1,7 @@
 package ua.edu.lp.reliability.jira;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -22,6 +24,7 @@ import ua.edu.lp.reliability.model.issue.IssuePriority;
 import ua.edu.lp.reliability.model.jira.JiraSettings;
 import ua.edu.lp.reliability.model.project.Project;
 import ua.edu.lp.reliability.model.user.User;
+import ua.edu.lp.reliability.model.user.UserRole;
 import ua.edu.lp.reliability.service.event.ApplicationEventPublisher;
 
 import com.atlassian.jira.rest.client.api.JiraRestClient;
@@ -35,8 +38,8 @@ public class DefaultJiraService implements JiraService {
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultJiraService.class);
 
 	private static final String PROJECT_JQL = "project=";
-	
-	@Resource(name="defaultApplicationEventPublisher")
+
+	@Resource(name = "defaultApplicationEventPublisher")
 	private ApplicationEventPublisher applicationEventPublisher;
 
 	@Override
@@ -75,6 +78,7 @@ public class DefaultJiraService implements JiraService {
 		return issues;
 	}
 
+	// TODO: IP - Make this code more clear
 	@Override
 	@Async
 	public void importIssueForProject(Project project) {
@@ -91,10 +95,14 @@ public class DefaultJiraService implements JiraService {
 			int issueCount = searchResult.getTotal();
 
 			while (issueCount > startAt) {
-				searchResult = requestIssues(restClient, jiraSettings.getProjectUid(), startAt, maxResults);
-				startAt = searchResult.getMaxResults() + searchResult.getStartIndex();
+				try {
+					searchResult = requestIssues(restClient, jiraSettings.getProjectUid(), startAt, maxResults);
+					startAt = searchResult.getMaxResults() + searchResult.getStartIndex();
 
-				processIssue(searchResult.getIssues(), project);
+					processIssue(searchResult.getIssues(), project);
+				} catch (Exception e) {
+					LOG.error("Error while execute request to jira. Issue start position: " + startAt + "; max result: " + maxResults, e);
+				}
 			}
 		} catch (URISyntaxException e) {
 			LOG.error("Error while parsing URI", e);
@@ -144,10 +152,13 @@ public class DefaultJiraService implements JiraService {
 		issue.setKey(jiraIssue.getKey());
 		issue.setProject(project);
 		issue.setCreateDate(jiraIssue.getCreationDate().toDate());
-		issue.setSummary(jiraIssue.getDescription());
+		// NOTE: Takes only part of issue's description.
+		issue.setSummary(StringUtils.substring(jiraIssue.getDescription(), BigDecimal.ZERO.intValue(), Byte.MAX_VALUE));
 
 		if (jiraIssue.getReporter() != null) {
 			User reporter = new User();
+			// NOTE: Default value for user's role
+			reporter.setRole(UserRole.USER);
 			reporter.setFullname(jiraIssue.getReporter().getDisplayName());
 			reporter.setLogin(jiraIssue.getReporter().getName());
 			issue.setReporter(reporter);

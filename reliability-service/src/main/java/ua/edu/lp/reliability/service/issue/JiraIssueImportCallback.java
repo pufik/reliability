@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.edu.lp.reliability.dao.exception.ModelNotFoundException;
 import ua.edu.lp.reliability.model.issue.Issue;
 import ua.edu.lp.reliability.model.user.User;
 import ua.edu.lp.reliability.service.user.UserService;
@@ -42,8 +43,8 @@ public class JiraIssueImportCallback implements Callback<List<Issue>> {
 		try {
 			reporter = userService.getUserByLogin(issue.getReporter().getLogin());
 			issue.setReporter(reporter);
-		} catch (NoResultException ex) {
-			LOG.warn("No existing user");
+		} catch (ModelNotFoundException ex) {
+			LOG.warn("No existing user", ex);
 		}
 
 		issueService.createIssue(issue);
