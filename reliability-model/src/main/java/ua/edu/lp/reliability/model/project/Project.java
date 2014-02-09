@@ -1,8 +1,10 @@
 package ua.edu.lp.reliability.model.project;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,6 +22,7 @@ import javax.persistence.Table;
 
 import ua.edu.lp.reliability.model.issue.Issue;
 import ua.edu.lp.reliability.model.jira.JiraSettings;
+import ua.edu.lp.reliability.model.math.StatisticModelExperiment;
 import ua.edu.lp.reliability.model.metric.SonarSettings;
 
 @Entity
@@ -48,10 +51,12 @@ public class Project implements Serializable {
 
 	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL)
 	private SonarSettings settings;
-	
+
 	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL)
 	private JiraSettings jiraSettings;
-	
+
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<StatisticModelExperiment> experiments = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -96,7 +101,7 @@ public class Project implements Serializable {
 	public void addIssue(Issue issue) {
 		this.issues.add(issue);
 		issue.setProject(this);
-	} 
+	}
 
 	public SonarSettings getSettings() {
 		return settings;
@@ -105,13 +110,27 @@ public class Project implements Serializable {
 	public void setSettings(SonarSettings settings) {
 		this.settings = settings;
 	}
-	
+
 	public JiraSettings getJiraSettings() {
 		return jiraSettings;
 	}
 
 	public void setJiraSettings(JiraSettings jiraSettings) {
 		this.jiraSettings = jiraSettings;
+	}
+
+	public List<StatisticModelExperiment> getExperiments() {
+		return experiments;
+	}
+
+	public void setExperiments(List<StatisticModelExperiment> experiments) {
+		this.experiments = experiments;
+	}
+
+	public void addExperiment(StatisticModelExperiment experiment) {
+		this.experiments.add(experiment);
+		experiment.setProject(this);
+
 	}
 
 	@Override

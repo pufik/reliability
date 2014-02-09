@@ -13,6 +13,7 @@
 		<class>ua.edu.lp.reliability.model.issue.Issue</class>
 		<class>ua.edu.lp.reliability.model.metric.SonarSettings</class>
 		<class>ua.edu.lp.reliability.model.jira.JiraSettings</class>
+		<class>ua.edu.lp.reliability.model.math.StatisticModelExperiment</class>
 
 
 		<properties>
