@@ -85,6 +85,36 @@ function GraphPresenter(context) {
 		});
 	};
 	
+	this.showReliabilityFuncGraph = function(reportList) {
+		var dataGraph = [];
+		var maxX = 0;
+		for (key in reportList) {
+			var tmp = []; 
+			tmp.push(key);
+			tmp.push(reportList[key]);
+			dataGraph.push(tmp);
+			maxX = key;
+		}
+		
+		$('<div title="Reliability Functions"><div id="reliabilityChart" style="height: 600px; width: 500px; margin: 0 auto;"></div></div>')
+				.dialog({
+					width : 600,
+					height: context.getOptimalDialogHeight(),
+					modal : true,
+					open : function() {
+						createReliabilityFuncGraph('reliabilityChart', dataGraph, 'Reliability Function', +maxX + 10);
+					},
+					close : function() {
+						$(this).remove();
+					},
+					buttons: {
+						"Close": function(){
+							$(this).dialog("close");
+						}
+					}
+		});
+	};
+	
 	
 	var createPieChart = function(chartPlaceId, dataGraph){
 		var plot1 = jQuery.jqplot(chartPlaceId, [ dataGraph ], {
@@ -124,6 +154,63 @@ function GraphPresenter(context) {
 			             tickOptions: {
 			                 formatString: '%#d/%#m/%Y'
 			             }
+			         },
+			         yaxis: {
+			        	 label: "Issue",
+			             tickOptions: {
+			                 formatString: '%.2f'
+			             }
+			         }
+			     },
+			     highlighter: {
+			         sizeAdjust: 10,
+			         tooltipLocation: 'n',
+			         tooltipAxes: 'y',
+			         tooltipFormatString: '<b><i><span style="color:red;">Amount</span></i></b> %.2f',
+			         useAxesFormatters: false
+			     },
+			     cursor: {
+			         show: true,
+			         zoom:true,
+			         looseZoom: true
+			     },
+			     series:[
+			             {
+			               // Change our line width and use a diamond shaped marker.
+			               lineWidth:2,
+			               markerOptions: { style:'dimaond' }
+			             },
+			             {
+			               // Don't show a line, just show markers.
+			               // Make the markers 7 pixels with an 'x' style
+			               lineWidth:2,
+			               markerOptions: { size: 7, style:"x" }
+			             }
+			         ]	     
+			  });
+	};
+	
+	var createReliabilityFuncGraph = function(graphPlaceId, inputData, title, maxX ){
+		   $.jqplot.config.enablePlugins = true;
+			 
+			 var plot1 = $.jqplot(graphPlaceId,[inputData],{
+			     title: title,
+			     axesDefaults: {
+			         labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+			         renderer: $.jqplot.LinearAxisRenderer,
+			         min: 0
+			       },
+			     seriesDefaults: {
+			          rendererOptions: {
+			              smooth: true
+			          }
+			      },
+			     axes: {
+			         xaxis: {
+			        	 label: "Interval",
+			        	 min: 0,
+			        	 max: maxX
+			        	 
 			         },
 			         yaxis: {
 			        	 label: "Issue",

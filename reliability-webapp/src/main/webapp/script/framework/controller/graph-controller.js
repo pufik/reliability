@@ -62,4 +62,47 @@ function GraphController(context) {
 				
 		graphPresenter.showIssueStatisticGraph(dataList);
 	};
+	
+	//TODO: Move this chart to other controller
+	this.createLambdaChart = function(){
+		var t = $("#reliabilityInterval").val();
+		var L = $("#reliabilityL").val();
+		var B = $("#reliabilityB").val();
+		
+		var points = this.calculatePoints(t, L, B, this.funcLambda);
+    	
+		graphPresenter.showReliabilityFuncGraph(points);
+	};
+	
+    this.createMyuChart = function(){
+    	var t = $("#reliabilityInterval").val();
+		var L = $("#reliabilityL").val();
+		var B = $("#reliabilityB").val();
+    	
+		var points = this.calculatePoints(t, L, B, this.funcMyu);
+    	
+		graphPresenter.showReliabilityFuncGraph(points);
+    };
+	
+	this.calculatePoints = function(t, L, B, func){
+		var points = {};
+		var x = 0;
+		
+		while(t >= x){
+			points[x] = func(x, L, B);	
+			x++;
+		}
+		
+		return points;
+	};
+	
+	this.funcMyu = function(t, L, B)
+    {
+        return L*(1 - (1 + B*t)*Math.exp(-B*t));
+    };
+
+    this.funcLambda = function(t, L, B)
+    {
+        return L*B*B*t*Math.exp(-B*t);
+    };  
 }

@@ -43,7 +43,7 @@ function ProjectController(context) {
 	
 	this.generateReport = function(){
 		var projectId = $("#projectIdHolder").val();
-		var url = context.contextPath + "/action/issue/report/project/" + projectId + "/issue_report.xsl";
+		var url = context.contextPath + "/action/issue/report/project/" + projectId + "/issue_report_" + projectId+ "_.xls";
 		window.open(url, "_blank");
 	};
 	

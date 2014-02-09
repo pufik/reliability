@@ -71,6 +71,9 @@ function ProjectPresenter(context) {
 		$(".clearSonarSettings").button({ icons: {primary:'ui-icon-shuffle'}});
 		$(".saveJiraSettings").button({ icons: {primary:'ui-icon-disk'}});
 		$(".clearJiraSettings").button({ icons: {primary:'ui-icon-shuffle'}});
+		
+		$(".showMyuGraph").button({ icons: {primary:'ui-icon-shuffle'}});
+		$(".showLambdaGraph").button({ icons: {primary:'ui-icon-shuffle'}});
 	};
 	
 	this.showBugsView = function(issues) {

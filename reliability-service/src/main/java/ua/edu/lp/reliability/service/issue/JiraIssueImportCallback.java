@@ -3,7 +3,6 @@ package ua.edu.lp.reliability.service.issue;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.persistence.NoResultException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
