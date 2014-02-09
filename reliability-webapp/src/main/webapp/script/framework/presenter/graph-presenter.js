@@ -95,14 +95,14 @@ function GraphPresenter(context) {
 			dataGraph.push(tmp);
 			maxX = key;
 		}
+		var chartId = "reliabilityChart_" + new Date().getTime();
 		
-		$('<div title="Reliability Functions"><div id="reliabilityChart" style="height: 600px; width: 500px; margin: 0 auto;"></div></div>')
+		$('<div title="Reliability Functions"><div id="'+ chartId +'" style="height: 600px; width: 500px; margin: 0 auto;"></div></div>')
 				.dialog({
 					width : 600,
 					height: context.getOptimalDialogHeight(),
-					modal : true,
 					open : function() {
-						createReliabilityFuncGraph('reliabilityChart', dataGraph, 'Reliability Function', +maxX + 10);
+						createReliabilityFuncGraph(chartId, dataGraph, 'Reliability Function', +maxX + 10);
 					},
 					close : function() {
 						$(this).remove();
