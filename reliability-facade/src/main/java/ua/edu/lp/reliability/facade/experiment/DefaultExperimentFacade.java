@@ -14,6 +14,7 @@ import ua.edu.lp.reliability.facade.dto.ExperimentDTO;
 import ua.edu.lp.reliability.model.annotation.spring.Facade;
 import ua.edu.lp.reliability.model.math.StatisticModelExperiment;
 import ua.edu.lp.reliability.model.project.Project;
+import ua.edu.lp.reliability.service.experiment.ExperimentService;
 import ua.edu.lp.reliability.service.project.ProjectService;
 
 @Facade("experimentFacade")
@@ -24,6 +25,9 @@ public class DefaultExperimentFacade implements ExperimentFacade {
 
 	@Resource(name = "projectService")
 	private ProjectService projectService;
+
+	@Resource(name = "experimentService")
+	private ExperimentService experimentService;
 
 	@Resource(name = "experimentConverter")
 	private Converter<StatisticModelExperiment, ExperimentDTO> experimentConverter;
@@ -37,5 +41,17 @@ public class DefaultExperimentFacade implements ExperimentFacade {
 		Assert.notNull(project, "Project could not be null");
 
 		return experimentConverter.convertAll(project.getExperiments());
+	}
+
+	@Override
+	public ExperimentDTO recalculateExperiment(Long experimentId) {
+		StatisticModelExperiment experiment = experimentService.getExperimentById(experimentId);
+
+		Assert.notNull(experiment, "Experiment could not be null");
+		
+		experimentService.recalculateExperiment(experiment);
+		experimentService.updateExperiment(experiment);
+		
+		return experimentConverter.convert(experiment);
 	}
 }

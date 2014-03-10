@@ -22,6 +22,15 @@ function ApplicationContext(){
 		return projectController;
 	};
 	
+	this.getExperimentController = function(){		
+		
+		if(!controller.experiment){
+			controller.experiment = new ExperimentController(this);
+		}
+		
+		return controller.experiment;
+	};
+	
 	this.getGraphController = function(){
 		var graphController = controller.graph;
 		

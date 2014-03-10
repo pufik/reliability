@@ -56,13 +56,14 @@ function ProjectPresenter(context) {
 		$("#projectTabs").tabs({
 			beforeActivate: function(event, ui ) {
 				var tabIndex = ui.newTab.index();
+				var projectId = $("#projectIdHolder").val();
 				
 				if(tabIndex == 1){
-					var projectId = $("#projectIdHolder").val();
 					getContext().getProjectController().getBugs(projectId);	
 				}else if(tabIndex == 2){
-					var projectId = $("#projectIdHolder").val();
 					getContext().getProjectController().getMetrics(projectId);	
+				}else if(tabIndex == 3){
+					getContext().getExperimentController().getByProject(projectId);	
 				}
 			}
 		});

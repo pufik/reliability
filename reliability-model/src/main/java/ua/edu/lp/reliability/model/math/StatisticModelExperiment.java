@@ -46,6 +46,12 @@ public class StatisticModelExperiment implements Serializable {
 	@Column(name = "initial_B")
 	private BigDecimal initialB;
 
+	@Column(name = "result_L")
+	private BigDecimal resultL;
+
+	@Column(name = "result_B")
+	private BigDecimal resultB;
+
 	@Column(name = "errors")
 	private String errors;
 
@@ -117,6 +123,22 @@ public class StatisticModelExperiment implements Serializable {
 		this.initialB = initialB;
 	}
 
+	public BigDecimal getResultL() {
+		return resultL;
+	}
+
+	public void setResultL(BigDecimal resultL) {
+		this.resultL = resultL;
+	}
+
+	public BigDecimal getResultB() {
+		return resultB;
+	}
+
+	public void setResultB(BigDecimal resultB) {
+		this.resultB = resultB;
+	}
+
 	public String getErrors() {
 		return errors;
 	}
@@ -146,6 +168,9 @@ public class StatisticModelExperiment implements Serializable {
 		result = prime * result + ((intervalSize == null) ? 0 : intervalSize.hashCode());
 		result = prime * result + ((modelName == null) ? 0 : modelName.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((project == null) ? 0 : project.hashCode());
+		result = prime * result + ((resultB == null) ? 0 : resultB.hashCode());
+		result = prime * result + ((resultL == null) ? 0 : resultL.hashCode());
 		return result;
 	}
 
@@ -203,13 +228,28 @@ public class StatisticModelExperiment implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (project == null) {
+			if (other.project != null)
+				return false;
+		} else if (!project.equals(other.project))
+			return false;
+		if (resultB == null) {
+			if (other.resultB != null)
+				return false;
+		} else if (!resultB.equals(other.resultB))
+			return false;
+		if (resultL == null) {
+			if (other.resultL != null)
+				return false;
+		} else if (!resultL.equals(other.resultL))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "StatisticModelExperiment [id=" + id + ", name=" + name + ", modelName=" + modelName + ", intervalCount=" + intervalCount + ", intervalSize="
-				+ intervalSize + ", eps=" + eps + ", initialL=" + initialL + ", initialB=" + initialB + ", errors=" + errors + ", project=" + project + "]";
+				+ intervalSize + ", eps=" + eps + ", initialL=" + initialL + ", initialB=" + initialB + ", resultL=" + resultL + ", resultB=" + resultB
+				+ ", errors=" + errors + ", project=" + project + "]";
 	}
-
 }

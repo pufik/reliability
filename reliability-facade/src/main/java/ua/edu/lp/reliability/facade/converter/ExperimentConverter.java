@@ -21,6 +21,8 @@ public class ExperimentConverter extends AbstractConverter<StatisticModelExperim
 		target.setIntervalSize(source.getIntervalSize());
 		target.setInitialL(source.getInitialL());
 		target.setInitialB(source.getInitialB());
+		target.setResultL(source.getResultL());
+		target.setResultB(source.getResultB());
 		target.setEps(source.getEps());
 		target.setErrors(source.getErrors());
 

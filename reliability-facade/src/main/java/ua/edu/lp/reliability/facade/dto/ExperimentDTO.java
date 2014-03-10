@@ -20,6 +20,10 @@ public class ExperimentDTO {
 
 	private BigDecimal initialB;
 
+	private BigDecimal resultL;
+
+	private BigDecimal resultB;
+
 	private String errors;
 
 	public Long getId() {
@@ -84,6 +88,22 @@ public class ExperimentDTO {
 
 	public void setInitialB(BigDecimal initialB) {
 		this.initialB = initialB;
+	}
+
+	public BigDecimal getResultL() {
+		return resultL;
+	}
+
+	public void setResultL(BigDecimal resultL) {
+		this.resultL = resultL;
+	}
+
+	public BigDecimal getResultB() {
+		return resultB;
+	}
+
+	public void setResultB(BigDecimal resultB) {
+		this.resultB = resultB;
 	}
 
 	public String getErrors() {

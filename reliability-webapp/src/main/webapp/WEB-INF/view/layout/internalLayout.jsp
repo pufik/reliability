@@ -66,7 +66,7 @@
 
 		</div>
 		<div id="footer">
-			<p class="left">Copyright &copy; 2013, Reliability Team, Iurii
+			<p class="left">Copyright &copy; 2014, Reliability Team, Iurii
 				Parfeniuk</p>
 			<p class="right">
 				<a href="http://iknit.lp.edu.ua/pz/en/" target="_blank">NU "Lviv

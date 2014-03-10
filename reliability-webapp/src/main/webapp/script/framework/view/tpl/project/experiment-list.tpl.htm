@@ -1,0 +1,49 @@
+<div class="actionMenu">
+	<a href="#createNew" onclick="getContext().getProjectController().getAll()" class="buttonCreate" title="Add New Project">Add Issue</a>
+</div>
+<div id="experimentListPlace" style="width: 100%;">
+	<table id="experimentList" style="width: 100%">
+		<thead>
+			<tr>
+				<th style="width: 50px;">UID</th>
+				<th style="width: 125px;">name</th>
+				<th style="width: 85px;">Model</th>
+				<th style="width: 85px;">Interval Count</th>
+				<th style="width: 85px;">Interval Size</th>
+				<th style="width: 85px;">Initial L</th>
+				<th style="width: 85px;">Initial B</th>
+				<th style="width: 85px;">EPS</th>
+				<th style="width: 85px;">Result L</th>
+				<th style="width: 85px;">Result B</th>
+				<th style="width: 85px;">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each items}}
+			<tr>
+				<td><input type="hidden" name="experimentId" value="{{id}}" /> {{id}}</td>
+				<td>{{name}}</td>
+				<td>{{modelName}}</td>
+				<td>{{intervalCount}}</td>
+				<td>{{intervalSize}}</td>
+				<td>{{initialL}}</td>
+				<td>{{initialB}}</td>
+				<td>{{eps}}</td>
+				<td>{{resultL}}</td>
+				<td>{{resultB}} <input type="hidden" name="experimentErrors" value="{{errors}}" /></td>
+				<td>
+					<a href="#showLambdaGraph" class="showMyuGraph" onclick="getContext().getGraphController().createMyuChart({{intervalCount}}, {{intervalSize}}, {{resultL}}, {{resultB}})">M</a>
+					&nbsp;
+					<a href="#showMyuGraph" class="showLambdaGraph" onclick="getContext().getGraphController().createLambdaChart({{intervalCount}}, {{intervalSize}}, {{resultL}}, {{resultB}})">L</a>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+<div title="Import Issue" style="display: none;" class="importIssueFormDialog">
+	<form action="{{contextPath}}/action/issue/import/{{projectId}}" method="POST" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="submit" value="Upload" />
+	</form>
+</div>

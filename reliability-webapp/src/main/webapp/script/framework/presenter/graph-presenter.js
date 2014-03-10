@@ -1,6 +1,4 @@
 function GraphPresenter(context) {
-	var templateProvider = context.getTemplateProvider();
-
 	this.showGraphByIssuePriority = function(resultList) {
 		var dataGraph = [];
 		for (key in resultList) {

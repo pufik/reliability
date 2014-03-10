@@ -64,21 +64,15 @@ function GraphController(context) {
 	};
 	
 	//TODO: Move this chart to other controller
-	this.createLambdaChart = function(){
-		var t = $("#reliabilityInterval").val();
-		var L = $("#reliabilityL").val();
-		var B = $("#reliabilityB").val();
-		
+	this.createLambdaChart = function(count, size, L, B){
+		var t = count * size;
 		var points = this.calculatePoints(t, L, B, this.funcLambda);
     	
 		graphPresenter.showReliabilityFuncGraph(points);
 	};
 	
-    this.createMyuChart = function(){
-    	var t = $("#reliabilityInterval").val();
-		var L = $("#reliabilityL").val();
-		var B = $("#reliabilityB").val();
-    	
+    this.createMyuChart = function(count, size, L, B){
+		var t = count * size;
 		var points = this.calculatePoints(t, L, B, this.funcMyu);
     	
 		graphPresenter.showReliabilityFuncGraph(points);
