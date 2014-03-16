@@ -1,5 +1,5 @@
 <div class="actionMenu">
-	<a href="#createNew" onclick="getContext().getProjectController().getAll()" class="buttonCreate" title="Add New Project">Add Issue</a>
+	<a href="#createNew" onclick="alert('Will be implemented ASAP')" class="buttonCreate" title="Add new Experiment">Add Experiment</a>
 </div>
 <div id="experimentListPlace" style="width: 100%;">
 	<table id="experimentList" style="width: 100%">
@@ -32,9 +32,11 @@
 				<td>{{resultL}}</td>
 				<td>{{resultB}} <input type="hidden" name="experimentErrors" value="{{errors}}" /></td>
 				<td>
-					<a href="#showLambdaGraph" class="showMyuGraph" onclick="getContext().getGraphController().createMyuChart({{intervalCount}}, {{intervalSize}}, {{resultL}}, {{resultB}})">M</a>
+					<a href="#showLambdaGraph" class="showMyuGraph" onclick="getContext().getGraphController().createMyuChart({{intervalCount}}, {{intervalSize}}, {{resultL}}, {{resultB}})">Myu</a>
 					&nbsp;
-					<a href="#showMyuGraph" class="showLambdaGraph" onclick="getContext().getGraphController().createLambdaChart({{intervalCount}}, {{intervalSize}}, {{resultL}}, {{resultB}})">L</a>
+					<a href="#showMyuGraph" class="showLambdaGraph" onclick="getContext().getGraphController().createLambdaChart({{intervalCount}}, {{intervalSize}}, {{resultL}}, {{resultB}})">Lambda</a>
+					<a href="#srecalculateExperiment" class="" onclick="getContext().getExperimentController().recalculateExperiment({{id}})">Recalculate</a>
+					<a href="#showDetailsDialog" class="" onclick="getContext().getExperimentController().getExperimentDetails({{id}})">Details</a>
 				</td>
 			</tr>
 			{{/each}}

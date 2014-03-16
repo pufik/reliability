@@ -19,7 +19,27 @@ function ExperimentPresenter(context) {
 		});
 		
 		$(".buttonCreate").button({ icons: {primary:'ui-icon-plusthick'}});
-		$(".showMyuGraph").button({ icons: {primary:'ui-icon-shuffle'}});
-		$(".showLambdaGraph").button({ icons: {primary:'ui-icon-shuffle'}});
+		//$(".showMyuGraph").button({ icons: {primary:'ui-icon-shuffle'}});
+		//$(".showLambdaGraph").button({ icons: {primary:'ui-icon-shuffle'}});
+	};
+	
+	this.showDetailsView = function(experiment) {
+		templateProvider.getContent("/project/experiment-info.tpl", experiment, this.showDetailsViewRender);
+	};
+
+	this.showDetailsViewRender = function(content) {
+		$(content).dialog({
+			width : 480,
+			height: 600,
+			modal : true,
+			close : function() {
+				$(this).remove();
+			},
+			buttons: {
+				"Close": function(){
+					$(this).dialog("close");
+				}
+			}
+		});
 	};
 }

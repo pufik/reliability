@@ -44,14 +44,22 @@ public class DefaultExperimentFacade implements ExperimentFacade {
 	}
 
 	@Override
+	public ExperimentDTO getExperimentDetails(Long experimentId) {
+		StatisticModelExperiment experiment = experimentService.getExperimentById(experimentId);
+
+		return experimentConverter.convert(experiment);
+	}
+
+	@Override
 	public ExperimentDTO recalculateExperiment(Long experimentId) {
 		StatisticModelExperiment experiment = experimentService.getExperimentById(experimentId);
 
 		Assert.notNull(experiment, "Experiment could not be null");
-		
+
 		experimentService.recalculateExperiment(experiment);
 		experimentService.updateExperiment(experiment);
-		
+
 		return experimentConverter.convert(experiment);
 	}
+
 }

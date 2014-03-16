@@ -26,7 +26,13 @@ public class ExperimentController {
 		return experimentFacade.getExperimentByProject(projectId);
 	}
 
-	@RequestMapping(value = "/recalculate/{experimentId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{experimentId}", method = RequestMethod.GET)
+	@ResponseBody
+	public ExperimentDTO getExperimentDetails(@PathVariable(value = "experimentId") Long experimentId) {
+		return experimentFacade.getExperimentDetails(experimentId);
+	}
+
+	@RequestMapping(value = "/{experimentId}/recalculate", method = RequestMethod.GET)
 	@ResponseBody
 	public ExperimentDTO recalculateExperiment(@PathVariable(value = "experimentId") Long experimentId) {
 		return experimentFacade.recalculateExperiment(experimentId);

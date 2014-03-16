@@ -1,0 +1,35 @@
+<div title="Experiment: {{name}}" id="experimentDetailsDialog">
+	<form style="margin: 0 auto;" id="experimentDetailsForm" onsubmit="return false;" >
+		<label for="projectName" style="font-weight: bold;">Name:</label>
+		<input type="text" name="experimentName" id="experimentName" style="width: 400px;" value="{{name}}"/>
+		<br />
+		<label for="modelName" style="font-weight: bold;">Model:</label>
+		<input type="text" name="modelName" id="modelName" style="width: 400px;" value="{{modelName}}"/>
+		<br />
+		<label for="intervalCount" style="font-weight: bold;">Interval Count:</label>
+		<input type="text" name="intervalCount" id="intervalCount" style="width: 100px;" value="{{intervalCount}}"/>
+		<br />
+		<label for="intervalSize" style="font-weight: bold;">Interval Size:</label>
+		<input type="text" name="intervalSize" id="intervalSize" style="width: 100px;" value="{{intervalSize}}"/>
+		<br />
+		<label for="initialL" style="font-weight: bold;">Initial L:</label>
+		<input type="text" name="initialL" id="initialL" style="width: 200px;" value="{{initialL}}"/>
+		<br />
+		<label for="initialB" style="font-weight: bold;">Initial B:</label>
+		<input type="text" name="initialB" id="initialB" style="width: 200px;" value="{{initialB}}"/>
+		<br />
+		<label for="errorEps" style="font-weight: bold;">EPS:</label>
+		<input type="text" name="errorEps" id="errorEps" style="width: 100px;" value="{{eps}}"/>
+		<br />
+		<label for="resultL" style="font-weight: bold;">Result L:</label>
+		<input type="text" name="resultL" id="resultL" style="width: 200px;" value="{{resultL}}"/>
+		<br />
+		<label for="resultB" style="font-weight: bold;">Result B:</label>
+		<input type="text" name="resultB" id="resultB" style="width: 200px;" value="{{resultB}}"/>
+		<br />
+		<label for="experimentErrors" style="font-weight: bold;">Errors:</label>
+		<br />
+		<textarea name="experimentErrors" id="experimentErrors" style="width: 445px; height: 100px;">{{errors}}</textarea>
+	</form>
+	<span style="display: none; color: red; font-weight: bold" id="projectCreateError"></span>
+</div>

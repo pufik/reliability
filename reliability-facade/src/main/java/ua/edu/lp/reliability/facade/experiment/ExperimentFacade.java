@@ -8,6 +8,8 @@ public interface ExperimentFacade {
 
 	List<ExperimentDTO> getExperimentByProject(Long projectId);
 
+	ExperimentDTO getExperimentDetails(Long experimentId);
+
 	ExperimentDTO recalculateExperiment(Long experimentId);
 
 }

@@ -8,6 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Reliability project</title>
 <script type="text/javascript"
 	src="${contextPath}/script/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript"

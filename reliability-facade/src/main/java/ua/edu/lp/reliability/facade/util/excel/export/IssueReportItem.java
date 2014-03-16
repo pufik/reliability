@@ -1,15 +1,23 @@
 package ua.edu.lp.reliability.facade.util.excel.export;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import ua.edu.lp.reliability.facade.dto.IssueDTO;
+import ua.edu.lp.reliability.model.issue.IssueType;
 
 public class IssueReportItem implements Comparable<IssueReportItem> {
 
 	private Date startDate;
 
 	private List<IssueDTO> issues;
+
+	private Map<IssueType, Collection<IssueDTO>> issueByType;
+
+	private Map<IssueType, BigDecimal> issuePerReporter;
 
 	public IssueReportItem() {
 		super();
@@ -34,6 +42,22 @@ public class IssueReportItem implements Comparable<IssueReportItem> {
 
 	public void setIssues(List<IssueDTO> issues) {
 		this.issues = issues;
+	}
+
+	public Map<IssueType, Collection<IssueDTO>> getIssueByType() {
+		return issueByType;
+	}
+
+	public void setIssueByType(Map<IssueType, Collection<IssueDTO>> issueByType) {
+		this.issueByType = issueByType;
+	}
+
+	public Map<IssueType, BigDecimal> getIssuePerReporter() {
+		return issuePerReporter;
+	}
+
+	public void setIssuePerReporter(Map<IssueType, BigDecimal> issuePerReporter) {
+		this.issuePerReporter = issuePerReporter;
 	}
 
 	@Override
